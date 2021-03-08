@@ -1,0 +1,401 @@
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 3 Client Error Message Reference</title><link rel="stylesheet" type="text/css" href="mvl.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="MySQL 5.7 Error Message Reference"><link rel="up" href="index.html" title="MySQL 5.7 Error Message Reference"><link rel="prev" href="server-error-reference.html" title="Chapter 2 Server Error Message Reference"><link rel="next" href="global-error-reference.html" title="Chapter 4 Global Error Message Reference"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3 Client Error Message Reference</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="server-error-reference.html">Previous</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="global-error-reference.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="client-error-reference"></a>Chapter 3 Client Error Message Reference</h1></div></div></div><p>
+      Client error messages originate from within the MySQL client
+      library. Here is an example client error message, as displayed by
+      the <span class="command"><strong>mysql</strong></span> client:
+    </p><pre class="programlisting">shell&gt; <strong class="userinput"><code>mysql -h no-such-host</code></strong>
+ERROR 2005 (HY000): Unknown MySQL server host 'no-such-host' (0)
+</pre><p>
+      Each client error message includes an error code, SQLSTATE value,
+      and message string, as described in
+      <a class="ulink" href="https://dev.mysql.com/doc/refman/5.7/en/error-message-components.html" target="_top">Error Message Sources and Components</a>. These components are
+      available as described in <a class="ulink" href="https://dev.mysql.com/doc/refman/5.7/en/error-interfaces.html" target="_top">Error Information Interfaces</a>. For
+      client errors, the SQLSTATE value is always
+      <code class="literal">'HY000'</code> (general error), so it is not
+      meaningful for distinguishing one client error from another.
+    </p><p>
+      The client library also makes available to host client programs
+      any errors that originate on the server side and are recieved by
+      the client from the server. For a list of server-side errors, see
+      <a class="xref" href="server-error-reference.html" title="Chapter 2 Server Error Message Reference">Chapter 2, <i>Server Error Message Reference</i></a>.
+    </p><p>
+      In addition to the errors in the following list, the client
+      library can also produce error messages that have error codes in
+      the range from 1 to 999. See
+      <a class="xref" href="global-error-reference.html" title="Chapter 4 Global Error Message Reference">Chapter 4, <i>Global Error Message Reference</i></a>
+    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><a name="error_cr_unknown_error"></a>
+      Error number: <code class="literal">2000</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_unknown_error"><code class="literal">CR_UNKNOWN_ERROR</code></a>;
+    </p><p>
+      Message: Unknown MySQL error
+    </p><a class="indexterm" name="idm45780627793536"></a><a class="indexterm" name="idm45780627792528"></a></li><li class="listitem"><p><a name="error_cr_socket_create_error"></a>
+      Error number: <code class="literal">2001</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_socket_create_error"><code class="literal">CR_SOCKET_CREATE_ERROR</code></a>;
+    </p><p>
+      Message: Can't create UNIX socket (%d)
+    </p><a class="indexterm" name="idm45780627788128"></a><a class="indexterm" name="idm45780627787120"></a></li><li class="listitem"><p><a name="error_cr_connection_error"></a>
+      Error number: <code class="literal">2002</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_connection_error"><code class="literal">CR_CONNECTION_ERROR</code></a>;
+    </p><p>
+      Message: Can't connect to local MySQL server through socket '%s'
+      (%d)
+    </p><a class="indexterm" name="idm45780627782624"></a><a class="indexterm" name="idm45780627781616"></a></li><li class="listitem"><p><a name="error_cr_conn_host_error"></a>
+      Error number: <code class="literal">2003</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_conn_host_error"><code class="literal">CR_CONN_HOST_ERROR</code></a>;
+    </p><p>
+      Message: Can't connect to MySQL server on '%s' (%d)
+    </p><a class="indexterm" name="idm45780627777136"></a><a class="indexterm" name="idm45780627776128"></a></li><li class="listitem"><p><a name="error_cr_ipsock_error"></a>
+      Error number: <code class="literal">2004</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_ipsock_error"><code class="literal">CR_IPSOCK_ERROR</code></a>;
+    </p><p>
+      Message: Can't create TCP/IP socket (%d)
+    </p><a class="indexterm" name="idm45780627771728"></a><a class="indexterm" name="idm45780627770720"></a></li><li class="listitem"><p><a name="error_cr_unknown_host"></a>
+      Error number: <code class="literal">2005</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_unknown_host"><code class="literal">CR_UNKNOWN_HOST</code></a>;
+    </p><p>
+      Message: Unknown MySQL server host '%s' (%d)
+    </p><a class="indexterm" name="idm45780627766240"></a><a class="indexterm" name="idm45780627765232"></a></li><li class="listitem"><p><a name="error_cr_server_gone_error"></a>
+      Error number: <code class="literal">2006</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_server_gone_error"><code class="literal">CR_SERVER_GONE_ERROR</code></a>;
+    </p><p>
+      Message: MySQL server has gone away
+    </p><a class="indexterm" name="idm45780627760832"></a><a class="indexterm" name="idm45780627759824"></a></li><li class="listitem"><p><a name="error_cr_version_error"></a>
+      Error number: <code class="literal">2007</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_version_error"><code class="literal">CR_VERSION_ERROR</code></a>;
+    </p><p>
+      Message: Protocol mismatch; server version = %d, client version =
+      %d
+    </p><a class="indexterm" name="idm45780627755328"></a><a class="indexterm" name="idm45780627754320"></a></li><li class="listitem"><p><a name="error_cr_out_of_memory"></a>
+      Error number: <code class="literal">2008</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_out_of_memory"><code class="literal">CR_OUT_OF_MEMORY</code></a>;
+    </p><p>
+      Message: MySQL client ran out of memory
+    </p><a class="indexterm" name="idm45780627749920"></a><a class="indexterm" name="idm45780627748912"></a></li><li class="listitem"><p><a name="error_cr_wrong_host_info"></a>
+      Error number: <code class="literal">2009</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_wrong_host_info"><code class="literal">CR_WRONG_HOST_INFO</code></a>;
+    </p><p>
+      Message: Wrong host info
+    </p><a class="indexterm" name="idm45780627744512"></a><a class="indexterm" name="idm45780627743504"></a></li><li class="listitem"><p><a name="error_cr_localhost_connection"></a>
+      Error number: <code class="literal">2010</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_localhost_connection"><code class="literal">CR_LOCALHOST_CONNECTION</code></a>;
+    </p><p>
+      Message: Localhost via UNIX socket
+    </p><a class="indexterm" name="idm45780627739104"></a><a class="indexterm" name="idm45780627738096"></a></li><li class="listitem"><p><a name="error_cr_tcp_connection"></a>
+      Error number: <code class="literal">2011</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_tcp_connection"><code class="literal">CR_TCP_CONNECTION</code></a>;
+    </p><p>
+      Message: %s via TCP/IP
+    </p><a class="indexterm" name="idm45780627733696"></a><a class="indexterm" name="idm45780627732688"></a></li><li class="listitem"><p><a name="error_cr_server_handshake_err"></a>
+      Error number: <code class="literal">2012</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_server_handshake_err"><code class="literal">CR_SERVER_HANDSHAKE_ERR</code></a>;
+    </p><p>
+      Message: Error in server handshake
+    </p><a class="indexterm" name="idm45780627728288"></a><a class="indexterm" name="idm45780627727280"></a></li><li class="listitem"><p><a name="error_cr_server_lost"></a>
+      Error number: <code class="literal">2013</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_server_lost"><code class="literal">CR_SERVER_LOST</code></a>;
+    </p><p>
+      Message: Lost connection to MySQL server during query
+    </p><a class="indexterm" name="idm45780627722800"></a><a class="indexterm" name="idm45780627721792"></a></li><li class="listitem"><p><a name="error_cr_commands_out_of_sync"></a>
+      Error number: <code class="literal">2014</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_commands_out_of_sync"><code class="literal">CR_COMMANDS_OUT_OF_SYNC</code></a>;
+    </p><p>
+      Message: Commands out of sync; you can't run this command now
+    </p><a class="indexterm" name="idm45780627717296"></a><a class="indexterm" name="idm45780627716288"></a><p>
+      Commands were executed in an improper order. This error occurs
+      when a function is called that is not appropriate for the current
+      state of the connection. For example, if
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-stmt-fetch.html" target="_top"><code class="literal">mysql_stmt_fetch()</code></a> is not called
+      enough times to read an entire result set (that is, enough times
+      to return <code class="literal">MYSQL_NO_DATA</code>), this error may occur
+      for the following C API call.
+    </p></li><li class="listitem"><p><a name="error_cr_namedpipe_connection"></a>
+      Error number: <code class="literal">2015</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_namedpipe_connection"><code class="literal">CR_NAMEDPIPE_CONNECTION</code></a>;
+    </p><p>
+      Message: Named pipe: %s
+    </p><a class="indexterm" name="idm45780627709408"></a><a class="indexterm" name="idm45780627708400"></a></li><li class="listitem"><p><a name="error_cr_namedpipewait_error"></a>
+      Error number: <code class="literal">2016</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_namedpipewait_error"><code class="literal">CR_NAMEDPIPEWAIT_ERROR</code></a>;
+    </p><p>
+      Message: Can't wait for named pipe to host: %s pipe: %s (%lu)
+    </p><a class="indexterm" name="idm45780627703904"></a><a class="indexterm" name="idm45780627702896"></a></li><li class="listitem"><p><a name="error_cr_namedpipeopen_error"></a>
+      Error number: <code class="literal">2017</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_namedpipeopen_error"><code class="literal">CR_NAMEDPIPEOPEN_ERROR</code></a>;
+    </p><p>
+      Message: Can't open named pipe to host: %s pipe: %s (%lu)
+    </p><a class="indexterm" name="idm45780627698416"></a><a class="indexterm" name="idm45780627697408"></a></li><li class="listitem"><p><a name="error_cr_namedpipesetstate_error"></a>
+      Error number: <code class="literal">2018</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_namedpipesetstate_error"><code class="literal">CR_NAMEDPIPESETSTATE_ERROR</code></a>;
+    </p><p>
+      Message: Can't set state of named pipe to host: %s pipe: %s (%lu)
+    </p><a class="indexterm" name="idm45780627692912"></a><a class="indexterm" name="idm45780627691904"></a></li><li class="listitem"><p><a name="error_cr_cant_read_charset"></a>
+      Error number: <code class="literal">2019</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_cant_read_charset"><code class="literal">CR_CANT_READ_CHARSET</code></a>;
+    </p><p>
+      Message: Can't initialize character set %s (path: %s)
+    </p><a class="indexterm" name="idm45780627687424"></a><a class="indexterm" name="idm45780627686416"></a></li><li class="listitem"><p><a name="error_cr_net_packet_too_large"></a>
+      Error number: <code class="literal">2020</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_net_packet_too_large"><code class="literal">CR_NET_PACKET_TOO_LARGE</code></a>;
+    </p><p>
+      Message: Got packet bigger than 'max_allowed_packet' bytes
+    </p><a class="indexterm" name="idm45780627681936"></a><a class="indexterm" name="idm45780627680928"></a></li><li class="listitem"><p><a name="error_cr_embedded_connection"></a>
+      Error number: <code class="literal">2021</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_embedded_connection"><code class="literal">CR_EMBEDDED_CONNECTION</code></a>;
+    </p><p>
+      Message: Embedded server
+    </p><a class="indexterm" name="idm45780627676528"></a><a class="indexterm" name="idm45780627675520"></a></li><li class="listitem"><p><a name="error_cr_probe_slave_status"></a>
+      Error number: <code class="literal">2022</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_probe_slave_status"><code class="literal">CR_PROBE_SLAVE_STATUS</code></a>;
+    </p><p>
+      Message: Error on SHOW SLAVE STATUS:
+    </p><a class="indexterm" name="idm45780627671120"></a><a class="indexterm" name="idm45780627670112"></a></li><li class="listitem"><p><a name="error_cr_probe_slave_hosts"></a>
+      Error number: <code class="literal">2023</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_probe_slave_hosts"><code class="literal">CR_PROBE_SLAVE_HOSTS</code></a>;
+    </p><p>
+      Message: Error on SHOW SLAVE HOSTS:
+    </p><a class="indexterm" name="idm45780627665712"></a><a class="indexterm" name="idm45780627664704"></a></li><li class="listitem"><p><a name="error_cr_probe_slave_connect"></a>
+      Error number: <code class="literal">2024</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_probe_slave_connect"><code class="literal">CR_PROBE_SLAVE_CONNECT</code></a>;
+    </p><p>
+      Message: Error connecting to slave:
+    </p><a class="indexterm" name="idm45780627660304"></a><a class="indexterm" name="idm45780627659296"></a></li><li class="listitem"><p><a name="error_cr_probe_master_connect"></a>
+      Error number: <code class="literal">2025</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_probe_master_connect"><code class="literal">CR_PROBE_MASTER_CONNECT</code></a>;
+    </p><p>
+      Message: Error connecting to master:
+    </p><a class="indexterm" name="idm45780627654896"></a><a class="indexterm" name="idm45780627653888"></a></li><li class="listitem"><p><a name="error_cr_ssl_connection_error"></a>
+      Error number: <code class="literal">2026</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_ssl_connection_error"><code class="literal">CR_SSL_CONNECTION_ERROR</code></a>;
+    </p><p>
+      Message: SSL connection error: %s
+    </p><a class="indexterm" name="idm45780627649488"></a><a class="indexterm" name="idm45780627648480"></a></li><li class="listitem"><p><a name="error_cr_malformed_packet"></a>
+      Error number: <code class="literal">2027</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_malformed_packet"><code class="literal">CR_MALFORMED_PACKET</code></a>;
+    </p><p>
+      Message: Malformed packet
+    </p><a class="indexterm" name="idm45780627644080"></a><a class="indexterm" name="idm45780627643072"></a></li><li class="listitem"><p><a name="error_cr_wrong_license"></a>
+      Error number: <code class="literal">2028</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_wrong_license"><code class="literal">CR_WRONG_LICENSE</code></a>;
+    </p><p>
+      Message: This client library is licensed only for use with MySQL
+      servers having '%s' license
+    </p><a class="indexterm" name="idm45780627638544"></a><a class="indexterm" name="idm45780627637536"></a></li><li class="listitem"><p><a name="error_cr_null_pointer"></a>
+      Error number: <code class="literal">2029</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_null_pointer"><code class="literal">CR_NULL_POINTER</code></a>;
+    </p><p>
+      Message: Invalid use of null pointer
+    </p><a class="indexterm" name="idm45780627633136"></a><a class="indexterm" name="idm45780627632128"></a></li><li class="listitem"><p><a name="error_cr_no_prepare_stmt"></a>
+      Error number: <code class="literal">2030</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_no_prepare_stmt"><code class="literal">CR_NO_PREPARE_STMT</code></a>;
+    </p><p>
+      Message: Statement not prepared
+    </p><a class="indexterm" name="idm45780627627728"></a><a class="indexterm" name="idm45780627626720"></a></li><li class="listitem"><p><a name="error_cr_params_not_bound"></a>
+      Error number: <code class="literal">2031</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_params_not_bound"><code class="literal">CR_PARAMS_NOT_BOUND</code></a>;
+    </p><p>
+      Message: No data supplied for parameters in prepared statement
+    </p><a class="indexterm" name="idm45780627622224"></a><a class="indexterm" name="idm45780627621216"></a></li><li class="listitem"><p><a name="error_cr_data_truncated"></a>
+      Error number: <code class="literal">2032</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_data_truncated"><code class="literal">CR_DATA_TRUNCATED</code></a>;
+    </p><p>
+      Message: Data truncated
+    </p><a class="indexterm" name="idm45780627616816"></a><a class="indexterm" name="idm45780627615808"></a></li><li class="listitem"><p><a name="error_cr_no_parameters_exists"></a>
+      Error number: <code class="literal">2033</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_no_parameters_exists"><code class="literal">CR_NO_PARAMETERS_EXISTS</code></a>;
+    </p><p>
+      Message: No parameters exist in the statement
+    </p><a class="indexterm" name="idm45780627611328"></a><a class="indexterm" name="idm45780627610320"></a></li><li class="listitem"><p><a name="error_cr_invalid_parameter_no"></a>
+      Error number: <code class="literal">2034</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_invalid_parameter_no"><code class="literal">CR_INVALID_PARAMETER_NO</code></a>;
+    </p><p>
+      Message: Invalid parameter number
+    </p><a class="indexterm" name="idm45780627605920"></a><a class="indexterm" name="idm45780627604912"></a><p>
+      The column number for
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-stmt-fetch-column.html" target="_top"><code class="literal">mysql_stmt_fetch_column()</code></a> was
+      invalid.
+    </p><p>
+      The parameter number for
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-stmt-send-long-data.html" target="_top"><code class="literal">mysql_stmt_send_long_data()</code></a> was
+      invalid.
+    </p><p>
+      A key name was empty or the amount of connection attribute data
+      for <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-options4.html" target="_top"><code class="literal">mysql_options4()</code></a> exceeds the
+      64KB limit.
+    </p></li><li class="listitem"><p><a name="error_cr_invalid_buffer_use"></a>
+      Error number: <code class="literal">2035</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_invalid_buffer_use"><code class="literal">CR_INVALID_BUFFER_USE</code></a>;
+    </p><p>
+      Message: Can't send long data for non-string/non-binary data types
+      (parameter: %d)
+    </p><a class="indexterm" name="idm45780627595936"></a><a class="indexterm" name="idm45780627594928"></a></li><li class="listitem"><p><a name="error_cr_unsupported_param_type"></a>
+      Error number: <code class="literal">2036</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_unsupported_param_type"><code class="literal">CR_UNSUPPORTED_PARAM_TYPE</code></a>;
+    </p><p>
+      Message: Using unsupported buffer type: %d (parameter: %d)
+    </p><a class="indexterm" name="idm45780627590448"></a><a class="indexterm" name="idm45780627589440"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_connection"></a>
+      Error number: <code class="literal">2037</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_connection"><code class="literal">CR_SHARED_MEMORY_CONNECTION</code></a>;
+    </p><p>
+      Message: Shared memory: %s
+    </p><a class="indexterm" name="idm45780627585040"></a><a class="indexterm" name="idm45780627584032"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_connect_request_error"></a>
+      Error number: <code class="literal">2038</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_connect_request_error"><code class="literal">CR_SHARED_MEMORY_CONNECT_REQUEST_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; client could not create request
+      event (%lu)
+    </p><a class="indexterm" name="idm45780627579520"></a><a class="indexterm" name="idm45780627578512"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_connect_answer_error"></a>
+      Error number: <code class="literal">2039</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_connect_answer_error"><code class="literal">CR_SHARED_MEMORY_CONNECT_ANSWER_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; no answer event received from
+      server (%lu)
+    </p><a class="indexterm" name="idm45780627574000"></a><a class="indexterm" name="idm45780627572992"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_connect_file_map_error"></a>
+      Error number: <code class="literal">2040</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_connect_file_map_error"><code class="literal">CR_SHARED_MEMORY_CONNECT_FILE_MAP_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; server could not allocate file
+      mapping (%lu)
+    </p><a class="indexterm" name="idm45780627568480"></a><a class="indexterm" name="idm45780627567472"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_connect_map_error"></a>
+      Error number: <code class="literal">2041</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_connect_map_error"><code class="literal">CR_SHARED_MEMORY_CONNECT_MAP_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; server could not get pointer to
+      file mapping (%lu)
+    </p><a class="indexterm" name="idm45780627562960"></a><a class="indexterm" name="idm45780627561952"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_file_map_error"></a>
+      Error number: <code class="literal">2042</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_file_map_error"><code class="literal">CR_SHARED_MEMORY_FILE_MAP_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; client could not allocate file
+      mapping (%lu)
+    </p><a class="indexterm" name="idm45780627557440"></a><a class="indexterm" name="idm45780627556432"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_map_error"></a>
+      Error number: <code class="literal">2043</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_map_error"><code class="literal">CR_SHARED_MEMORY_MAP_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; client could not get pointer to
+      file mapping (%lu)
+    </p><a class="indexterm" name="idm45780627551920"></a><a class="indexterm" name="idm45780627550912"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_event_error"></a>
+      Error number: <code class="literal">2044</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_event_error"><code class="literal">CR_SHARED_MEMORY_EVENT_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; client could not create %s
+      event (%lu)
+    </p><a class="indexterm" name="idm45780627546400"></a><a class="indexterm" name="idm45780627545392"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_connect_abandoned_error"></a>
+      Error number: <code class="literal">2045</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_connect_abandoned_error"><code class="literal">CR_SHARED_MEMORY_CONNECT_ABANDONED_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; no answer from server (%lu)
+    </p><a class="indexterm" name="idm45780627540896"></a><a class="indexterm" name="idm45780627539888"></a></li><li class="listitem"><p><a name="error_cr_shared_memory_connect_set_error"></a>
+      Error number: <code class="literal">2046</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_shared_memory_connect_set_error"><code class="literal">CR_SHARED_MEMORY_CONNECT_SET_ERROR</code></a>;
+    </p><p>
+      Message: Can't open shared memory; cannot send request event to
+      server (%lu)
+    </p><a class="indexterm" name="idm45780627535376"></a><a class="indexterm" name="idm45780627534368"></a></li><li class="listitem"><p><a name="error_cr_conn_unknow_protocol"></a>
+      Error number: <code class="literal">2047</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_conn_unknow_protocol"><code class="literal">CR_CONN_UNKNOW_PROTOCOL</code></a>;
+    </p><p>
+      Message: Wrong or unknown protocol
+    </p><a class="indexterm" name="idm45780627529968"></a><a class="indexterm" name="idm45780627528960"></a></li><li class="listitem"><p><a name="error_cr_invalid_conn_handle"></a>
+      Error number: <code class="literal">2048</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_invalid_conn_handle"><code class="literal">CR_INVALID_CONN_HANDLE</code></a>;
+    </p><p>
+      Message: Invalid connection handle
+    </p><a class="indexterm" name="idm45780627524000"></a><a class="indexterm" name="idm45780627522960"></a></li><li class="listitem"><p><a name="error_cr_secure_auth"></a>
+      Error number: <code class="literal">2049</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_secure_auth"><code class="literal">CR_SECURE_AUTH</code></a>;
+    </p><p>
+      Message: Connection using old (pre-4.1.1) authentication protocol
+      refused (client option 'secure_auth' enabled)
+    </p><a class="indexterm" name="idm45780627517776"></a><a class="indexterm" name="idm45780627516688"></a><p>
+      <a class="link" href="client-error-reference.html#error_cr_secure_auth"><code class="literal">CR_SECURE_AUTH</code></a> was removed after
+      5.7.4.
+    </p></li><li class="listitem"><p><a name="error_cr_unused_1"></a>
+      Error number: <code class="literal">2049</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_unused_1"><code class="literal">CR_UNUSED_1</code></a>;
+    </p><p>
+      Message: Connection using old (pre-4.1.1) authentication protocol
+      refused (client option 'secure_auth' enabled)
+    </p><a class="indexterm" name="idm45780627509920"></a><a class="indexterm" name="idm45780627508848"></a><p>
+      <a class="link" href="client-error-reference.html#error_cr_unused_1"><code class="literal">CR_UNUSED_1</code></a> was added in 5.7.5.
+    </p></li><li class="listitem"><p><a name="error_cr_fetch_canceled"></a>
+      Error number: <code class="literal">2050</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_fetch_canceled"><code class="literal">CR_FETCH_CANCELED</code></a>;
+    </p><p>
+      Message: Row retrieval was canceled by mysql_stmt_close() call
+    </p><a class="indexterm" name="idm45780627502000"></a><a class="indexterm" name="idm45780627500912"></a></li><li class="listitem"><p><a name="error_cr_no_data"></a>
+      Error number: <code class="literal">2051</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_no_data"><code class="literal">CR_NO_DATA</code></a>;
+    </p><p>
+      Message: Attempt to read column without prior row fetch
+    </p><a class="indexterm" name="idm45780627495712"></a><a class="indexterm" name="idm45780627494640"></a></li><li class="listitem"><p><a name="error_cr_no_stmt_metadata"></a>
+      Error number: <code class="literal">2052</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_no_stmt_metadata"><code class="literal">CR_NO_STMT_METADATA</code></a>;
+    </p><p>
+      Message: Prepared statement contains no metadata
+    </p><a class="indexterm" name="idm45780627489280"></a><a class="indexterm" name="idm45780627488240"></a></li><li class="listitem"><p><a name="error_cr_no_result_set"></a>
+      Error number: <code class="literal">2053</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_no_result_set"><code class="literal">CR_NO_RESULT_SET</code></a>;
+    </p><p>
+      Message: Attempt to read a row while there is no result set
+      associated with the statement
+    </p><a class="indexterm" name="idm45780627483008"></a><a class="indexterm" name="idm45780627481920"></a></li><li class="listitem"><p><a name="error_cr_not_implemented"></a>
+      Error number: <code class="literal">2054</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_not_implemented"><code class="literal">CR_NOT_IMPLEMENTED</code></a>;
+    </p><p>
+      Message: This feature is not implemented yet
+    </p><a class="indexterm" name="idm45780627476560"></a><a class="indexterm" name="idm45780627475520"></a></li><li class="listitem"><p><a name="error_cr_server_lost_extended"></a>
+      Error number: <code class="literal">2055</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_server_lost_extended"><code class="literal">CR_SERVER_LOST_EXTENDED</code></a>;
+    </p><p>
+      Message: Lost connection to MySQL server at '%s', system error: %d
+    </p><a class="indexterm" name="idm45780627470144"></a><a class="indexterm" name="idm45780627469104"></a></li><li class="listitem"><p><a name="error_cr_stmt_closed"></a>
+      Error number: <code class="literal">2056</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_stmt_closed"><code class="literal">CR_STMT_CLOSED</code></a>;
+    </p><p>
+      Message: Statement closed indirectly because of a preceding %s()
+      call
+    </p><a class="indexterm" name="idm45780627463888"></a><a class="indexterm" name="idm45780627462800"></a></li><li class="listitem"><p><a name="error_cr_new_stmt_metadata"></a>
+      Error number: <code class="literal">2057</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_new_stmt_metadata"><code class="literal">CR_NEW_STMT_METADATA</code></a>;
+    </p><p>
+      Message: The number of columns in the result set differs from the
+      number of bound buffers. You must reset the statement, rebind the
+      result set columns, and execute the statement again
+    </p><a class="indexterm" name="idm45780627457296"></a><a class="indexterm" name="idm45780627456256"></a></li><li class="listitem"><p><a name="error_cr_already_connected"></a>
+      Error number: <code class="literal">2058</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_already_connected"><code class="literal">CR_ALREADY_CONNECTED</code></a>;
+    </p><p>
+      Message: This handle is already connected. Use a separate handle
+      for each connection.
+    </p><a class="indexterm" name="idm45780627450864"></a><a class="indexterm" name="idm45780627449824"></a></li><li class="listitem"><p><a name="error_cr_auth_plugin_cannot_load"></a>
+      Error number: <code class="literal">2059</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_auth_plugin_cannot_load"><code class="literal">CR_AUTH_PLUGIN_CANNOT_LOAD</code></a>;
+    </p><p>
+      Message: Authentication plugin '%s' cannot be loaded: %s
+    </p><a class="indexterm" name="idm45780627444496"></a><a class="indexterm" name="idm45780627443408"></a></li><li class="listitem"><p><a name="error_cr_duplicate_connection_attr"></a>
+      Error number: <code class="literal">2060</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_duplicate_connection_attr"><code class="literal">CR_DUPLICATE_CONNECTION_ATTR</code></a>;
+    </p><p>
+      Message: There is an attribute with the same name already
+    </p><a class="indexterm" name="idm45780627438000"></a><a class="indexterm" name="idm45780627436912"></a><p>
+      A duplicate connection attribute name was specified for
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-options4.html" target="_top"><code class="literal">mysql_options4()</code></a>.
+    </p></li><li class="listitem"><p><a name="error_cr_auth_plugin_err"></a>
+      Error number: <code class="literal">2061</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_auth_plugin_err"><code class="literal">CR_AUTH_PLUGIN_ERR</code></a>;
+    </p><p>
+      Message: Authentication plugin '%s' reported error: %s
+    </p><a class="indexterm" name="idm45780627429840"></a><a class="indexterm" name="idm45780627428800"></a><p>
+      <a class="link" href="client-error-reference.html#error_cr_auth_plugin_err"><code class="literal">CR_AUTH_PLUGIN_ERR</code></a> was added in
+      5.7.1.
+    </p></li><li class="listitem"><p><a name="error_cr_insecure_api_err"></a>
+      Error number: <code class="literal">2062</code>; Symbol:
+      <a class="link" href="client-error-reference.html#error_cr_insecure_api_err"><code class="literal">CR_INSECURE_API_ERR</code></a>;
+    </p><p>
+      Message: Insecure API function call: '%s' Use instead: '%s'
+    </p><a class="indexterm" name="idm45780627421776"></a><a class="indexterm" name="idm45780627420736"></a><p>
+      An insecure function call was detected. Modify the application to
+      use the suggested alternative function instead.
+    </p><p>
+      <a class="link" href="client-error-reference.html#error_cr_insecure_api_err"><code class="literal">CR_INSECURE_API_ERR</code></a> was added in
+      5.7.6.
+    </p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="server-error-reference.html">Previous</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="global-error-reference.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2 Server Error Message Reference </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 4 Global Error Message Reference</td></tr></table></div><div class="copyright-footer"></div></body></html>

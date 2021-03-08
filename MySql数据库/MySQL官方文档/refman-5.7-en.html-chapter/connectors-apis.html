@@ -1,0 +1,1286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Chapter 27 Connectors and APIs</title>
+<link rel="stylesheet" href="mvl.css" type="text/css" />
+<meta name="generator" content="DocBook XSL Stylesheets + chunker.py v1.9.2" />
+<link rel="start" href="index.html" title="{book-title}" />
+<link rel="up" href="" title="" />
+<link rel="prev" href="sys-schema.html" title="Chapter 26 MySQL sys Schema" />
+<link rel="next" href="mysql-enterprise.html" title="Chapter 28 MySQL Enterprise Edition" />
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header">
+<tr>
+<th colspan="3" align="center">Chapter 27 Connectors and APIs</th>
+</tr>
+<tr>
+<td width="20%" align="left"><a accesskey="p" href="sys-schema.html">Prev</a> </td>
+<th width="60%" align="center"></th>
+<td width="20%" align="right"> <a accesskey="n" href="mysql-enterprise.html">Next</a></td>
+</tr>
+</table>
+<hr>
+</div>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title"><a name="connectors-apis"></a>Chapter 27 Connectors and APIs</h1>
+
+</div>
+
+</div>
+
+</div>
+<div class="toc">
+<p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="connectors-apis.html#connector-cpp-info">27.1 MySQL Connector/C++</a></span></dt><dt><span class="section"><a href="connectors-apis.html#connector-j-info">27.2 MySQL Connector/J</a></span></dt><dt><span class="section"><a href="connectors-apis.html#connector-net-info">27.3 MySQL Connector/NET</a></span></dt><dt><span class="section"><a href="connectors-apis.html#connector-odbc-info">27.4 MySQL Connector/ODBC</a></span></dt><dt><span class="section"><a href="connectors-apis.html#connector-python-info">27.5 MySQL Connector/Python</a></span></dt><dt><span class="section"><a href="connectors-apis.html#libmysqld">27.6 libmysqld, the Embedded MySQL Server Library</a></span></dt><dd><dl><dt><span class="section"><a href="connectors-apis.html#libmysqld-compiling">27.6.1 Compiling Programs with libmysqld</a></span></dt><dt><span class="section"><a href="connectors-apis.html#libmysqld-restrictions">27.6.2 Restrictions When Using the Embedded MySQL Server</a></span></dt><dt><span class="section"><a href="connectors-apis.html#libmysqld-options">27.6.3 Options with the Embedded Server</a></span></dt><dt><span class="section"><a href="connectors-apis.html#libmysqld-example">27.6.4 Embedded Server Examples</a></span></dt></dl></dd><dt><span class="section"><a href="connectors-apis.html#c-api-info">27.7 MySQL C API</a></span></dt><dt><span class="section"><a href="connectors-apis.html#apis-php-info">27.8 MySQL PHP API</a></span></dt><dt><span class="section"><a href="connectors-apis.html#apis-perl">27.9 MySQL Perl API</a></span></dt><dt><span class="section"><a href="connectors-apis.html#apis-python">27.10 MySQL Python API</a></span></dt><dt><span class="section"><a href="connectors-apis.html#apis-ruby">27.11 MySQL Ruby APIs</a></span></dt><dd><dl><dt><span class="section"><a href="connectors-apis.html#apis-ruby-mysqlruby">27.11.1 The MySQL/Ruby API</a></span></dt><dt><span class="section"><a href="connectors-apis.html#apis-ruby-rubymysql">27.11.2 The Ruby/MySQL API</a></span></dt></dl></dd><dt><span class="section"><a href="connectors-apis.html#apis-tcl">27.12 MySQL Tcl API</a></span></dt><dt><span class="section"><a href="connectors-apis.html#apis-eiffel">27.13 MySQL Eiffel Wrapper</a></span></dt></dl>
+</div>
+<a class="indexterm" name="idm46415287272464"></a><a class="indexterm" name="idm46415287271392"></a><a class="indexterm" name="idm46415287270320"></a><a class="indexterm" name="idm46415287269248"></a><a class="indexterm" name="idm46415287268176"></a><a class="indexterm" name="idm46415287267104"></a><a class="indexterm" name="idm46415287266032"></a><a class="indexterm" name="idm46415287264960"></a><a class="indexterm" name="idm46415287263888"></a><a class="indexterm" name="idm46415287262816"></a><a class="indexterm" name="idm46415287261744"></a><a class="indexterm" name="idm46415287260672"></a><a class="indexterm" name="idm46415287259600"></a><a class="indexterm" name="idm46415287258112"></a><a class="indexterm" name="idm46415287256624"></a><p>
+    MySQL Connectors provide connectivity to the MySQL server for client
+    programs. APIs provide low-level access to MySQL resources using
+    either the classic MySQL protocol or X Protocol. Both Connectors and the
+    APIs enable you to connect and execute MySQL statements from another
+    language or environment, including ODBC, Java (JDBC), C++, Python,
+    PHP, Perl, Ruby, and native C and embedded MySQL instances.
+</p>
+<h2><a name="idm46415287254304"></a>MySQL Connectors</h2>
+<p>
+    Oracle develops a number of connectors:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        <a class="ulink" href="https://dev.mysql.com/doc/connector-cpp/8.0/en/" target="_top">Connector/C++</a> enables
+        C++ applications to connect to MySQL.
+      </p></li><li class="listitem"><p>
+        <a class="ulink" href="https://dev.mysql.com/doc/connector-j/5.1/en/" target="_top">Connector/J</a> provides
+        driver support for connecting to MySQL from Java applications
+        using the standard Java Database Connectivity (JDBC) API.
+      </p></li><li class="listitem"><p>
+        <a class="ulink" href="https://dev.mysql.com/doc/connector-net/en/" target="_top">Connector/NET</a> enables developers
+        to create .NET applications that connect to MySQL. Connector/NET
+        implements a fully functional ADO.NET interface and provides
+        support for use with ADO.NET aware tools. Applications that use
+        Connector/NET can be written in any supported .NET language.
+      </p><p>
+        <a class="ulink" href="https://dev.mysql.com/doc/visual-studio/en/" target="_top">MySQL for Visual Studio</a> works with Connector/NET
+        and Microsoft Visual Studio 2012, 2013, 2015, and 2017. MySQL for Visual Studio
+        provides access to MySQL objects and data from Visual Studio. As
+        a Visual Studio package, it integrates directly into Server
+        Explorer providing the ability to create new connections and
+        work with MySQL database objects.
+      </p></li><li class="listitem"><p>
+        <a class="ulink" href="https://dev.mysql.com/doc/connector-odbc/en/" target="_top">Connector/ODBC</a> provides
+        driver support for connecting to MySQL using the Open Database
+        Connectivity (ODBC) API. Support is available for ODBC
+        connectivity from Windows, Unix, and macOS platforms.
+      </p></li><li class="listitem"><p>
+        <a class="ulink" href="https://dev.mysql.com/doc/connector-python/en/" target="_top">Connector/Python</a>
+        provides driver support for connecting to MySQL from Python
+        applications using an API that is compliant with the
+        <a class="ulink" href="http://www.python.org/dev/peps/pep-0249/" target="_top">Python DB
+        API version 2.0</a>. No additional Python modules or MySQL
+        client libraries are required.
+</p></li></ul>
+</div>
+<h2><a name="idm46415287242064"></a>The MySQL C API</h2>
+<p>
+    For direct access to using MySQL natively within a C application,
+    there are two methods:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        The <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/" target="_top">C API</a> provides low-level access
+        to the MySQL client/server protocol through the
+        <code class="literal">libmysqlclient</code> client library. This is the
+        primary method used to connect to an instance of the MySQL
+        server, and is used both by MySQL command-line clients and many
+        of the MySQL Connectors and third-party APIs detailed here.
+      </p><p>
+        <code class="literal">libmysqlclient</code> is included in MySQL
+        distributions.
+      </p></li><li class="listitem"><p>
+        <code class="literal">libmysqld</code> is an embedded MySQL server library
+        that enables you to embed an instance of the MySQL server into
+        your C applications.
+      </p><p>
+        <code class="literal">libmysqld</code> is included in MySQL distributions.
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+
+<div class="admon-title">
+Note
+</div>
+<p>
+          The <code class="literal">libmysqld</code> embedded server library is
+          deprecated as of MySQL 5.7.19 and is removed in MySQL
+          8.0.
+</p>
+</div>
+</li></ul>
+</div>
+<p>
+    See also <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/c-api-implementations.html" target="_top">MySQL C API Implementations</a>.
+  </p><p>
+    To access MySQL from a C application, or to build an interface to
+    MySQL for a language not supported by the Connectors or APIs in this
+    chapter, the <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/" target="_top">C API</a> is where to start. A
+    number of programmer's utilities are available to help with the
+    process; see <a class="xref" href="programs.html#programs-development" title="4.7 Program Development Utilities">Section 4.7, “Program Development Utilities”</a>.
+</p>
+<h2><a name="idm46415287229040"></a>Third-Party MySQL APIs</h2>
+<p>
+    The remaining APIs described in this chapter provide an interface to
+    MySQL from specific application languages. These third-party
+    solutions are not developed or supported by Oracle. Basic
+    information on their usage and abilities is provided here for
+    reference purposes only.
+  </p><p>
+    All the third-party language APIs are developed using one of two
+    methods, using <code class="literal">libmysqlclient</code> or by implementing
+    a <span class="firstterm">native driver</span>. The two
+    solutions offer different benefits:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        Using <span class="emphasis"><em><code class="literal">libmysqlclient</code></em></span>
+        offers complete compatibility with MySQL because it uses the
+        same libraries as the MySQL client applications. However, the
+        feature set is limited to the implementation and interfaces
+        exposed through <code class="literal">libmysqlclient</code> and the
+        performance may be lower as data is copied between the native
+        language, and the MySQL API components.
+      </p></li><li class="listitem"><p>
+        <span class="emphasis"><em>Native drivers</em></span> are an implementation of the
+        MySQL network protocol entirely within the host language or
+        environment. Native drivers are fast, as there is less copying
+        of data between components, and they can offer advanced
+        functionality not available through the standard MySQL API.
+        Native drivers are also easier for end users to build and deploy
+        because no copy of the MySQL client libraries is needed to build
+        the native driver components.
+</p></li></ul>
+</div>
+<p>
+    <a class="xref" href="connectors-apis.html#connectors-apis-summary" title="Table 27.1 MySQL APIs and Interfaces">Table 27.1, “MySQL APIs and Interfaces”</a> lists many of the
+    libraries and interfaces available for MySQL.
+</p>
+<div class="table">
+<a name="connectors-apis-summary"></a><p class="title"><b>Table 27.1 MySQL APIs and Interfaces</b></p>
+<div class="table-contents">
+<table summary="Summary of MySQL APIs and interfaces showing the environment, API, type, and related notes."><col width="10%"><col width="35%"><col width="15%"><col width="40%"><thead><tr>
+      <th scope="col">Environment</th>
+      <th scope="col">API</th>
+      <th scope="col">Type</th>
+      <th scope="col">Notes</th>
+    </tr></thead><tbody><tr>
+      <td scope="row">Ada</td>
+      <td>GNU Ada MySQL Bindings</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="http://gnade.sourceforge.net/" target="_top">MySQL Bindings for GNU
+        Ada</a></td>
+    </tr><tr>
+      <td scope="row">C</td>
+      <td>C API</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/" target="_top">MySQL 5.7 C API Developer Guide</a>.</td>
+    </tr><tr>
+      <td scope="row">C++</td>
+      <td>Connector/C++</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/connector-cpp/8.0/en/" target="_top">MySQL Connector/C++ 8.0 Developer Guide</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td>MySQL++</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="http://tangentsoft.net/mysql++/doc/" target="_top">MySQL++
+        website</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td>MySQL wrapped</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="http://www.alhem.net/project/mysql/" target="_top">MySQL
+        wrapped</a>.</td>
+    </tr><tr>
+      <td scope="row">Cocoa</td>
+      <td>MySQL-Cocoa</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>Compatible with the Objective-C Cocoa environment. See
+        <a class="ulink" href="http://mysql-cocoa.sourceforge.net/" target="_top">http://mysql-cocoa.sourceforge.net/</a></td>
+    </tr><tr>
+      <td scope="row">D</td>
+      <td>MySQL for D</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="http://www.steinmole.de/d/" target="_top">MySQL for D</a>.</td>
+    </tr><tr>
+      <td scope="row">Eiffel</td>
+      <td>Eiffel MySQL</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="xref" href="connectors-apis.html#apis-eiffel" title="27.13 MySQL Eiffel Wrapper">Section 27.13, “MySQL Eiffel Wrapper”</a>.</td>
+    </tr><tr>
+      <td scope="row">Erlang</td>
+      <td><code class="literal">erlang-mysql-driver</code></td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See
+        <a class="ulink" href="http://code.google.com/p/erlang-mysql-driver/" target="_top"><code class="literal">erlang-mysql-driver</code>.</a></td>
+    </tr><tr>
+      <td scope="row">Haskell</td>
+      <td>Haskell MySQL Bindings</td>
+      <td>Native Driver</td>
+      <td>See <a class="ulink" href="http://www.serpentine.com/blog/software/mysql/" target="_top">Brian
+        O'Sullivan's pure Haskell MySQL bindings</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td><code class="literal">hsql-mysql</code></td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See
+        <a class="ulink" href="http://hackage.haskell.org/cgi-bin/hackage-scripts/package/hsql-mysql-1.7" target="_top">MySQL
+        driver for Haskell</a>.</td>
+    </tr><tr>
+      <td scope="row">Java/JDBC</td>
+      <td>Connector/J</td>
+      <td>Native Driver</td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/connector-j/5.1/en/" target="_top">MySQL Connector/J 5.1 Developer Guide</a>.</td>
+    </tr><tr>
+      <td scope="row">Kaya</td>
+      <td>MyDB</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="http://kayalang.org/library/latest/MyDB" target="_top">MyDB</a>.</td>
+    </tr><tr>
+      <td scope="row">Lua</td>
+      <td>LuaSQL</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See
+        <a class="ulink" href="http://keplerproject.github.io/luasql/doc/us/" target="_top">LuaSQL</a>.</td>
+    </tr><tr>
+      <td scope="row">.NET/Mono</td>
+      <td>Connector/NET</td>
+      <td>Native Driver</td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/connector-net/en/" target="_top">MySQL Connector/NET Developer Guide</a>.</td>
+    </tr><tr>
+      <td scope="row">Objective Caml</td>
+      <td>OBjective Caml MySQL Bindings</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="http://raevnos.pennmush.org/code/ocaml-mysql/" target="_top">MySQL
+        Bindings for Objective Caml</a>.</td>
+    </tr><tr>
+      <td scope="row">Octave</td>
+      <td>Database bindings for GNU Octave</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See
+        <a class="ulink" href="http://octave.sourceforge.net/database/index.html" target="_top">Database
+        bindings for GNU Octave</a>.</td>
+    </tr><tr>
+      <td scope="row">ODBC</td>
+      <td>Connector/ODBC</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/connector-odbc/en/" target="_top">MySQL Connector/ODBC Developer Guide</a>.</td>
+    </tr><tr>
+      <td scope="row">Perl</td>
+      <td><code class="literal">DBI</code>/<code class="literal">DBD::mysql</code></td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="xref" href="connectors-apis.html#apis-perl" title="27.9 MySQL Perl API">Section 27.9, “MySQL Perl API”</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td><code class="literal">Net::MySQL</code></td>
+      <td>Native Driver</td>
+      <td>See
+        <a class="ulink" href="http://search.cpan.org/dist/Net-MySQL/MySQL.pm" target="_top"><code class="literal">Net::MySQL</code></a>
+        at CPAN</td>
+    </tr><tr>
+      <td scope="row">PHP</td>
+      <td><code class="literal">mysql</code>, <code class="literal">ext/mysql</code> interface
+        (deprecated)</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/apis-php/en/apis-php-mysql.html" target="_top">Original MySQL API</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td><code class="literal">mysqli</code>, <code class="literal">ext/mysqli</code> interface</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.html" target="_top">MySQL Improved Extension</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td><code class="literal">PDO_MYSQL</code></td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/apis-php/en/apis-php-pdo-mysql.html" target="_top">MySQL Functions (PDO_MYSQL)</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td>PDO mysqlnd</td>
+      <td>Native Driver</td>
+      <td></td>
+    </tr><tr>
+      <td scope="row">Python</td>
+      <td>Connector/Python</td>
+      <td>Native Driver</td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/connector-python/en/" target="_top">MySQL Connector/Python Developer Guide</a>.</td>
+    </tr><tr>
+      <td scope="row">Python</td>
+      <td>Connector/Python C Extension</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="ulink" href="https://dev.mysql.com/doc/connector-python/en/" target="_top">MySQL Connector/Python Developer Guide</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td>MySQLdb</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="xref" href="connectors-apis.html#apis-python" title="27.10 MySQL Python API">Section 27.10, “MySQL Python API”</a>.</td>
+    </tr><tr>
+      <td scope="row">Ruby</td>
+      <td>MySQL/Ruby</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>Uses <code class="literal">libmysqlclient</code>. See
+        <a class="xref" href="connectors-apis.html#apis-ruby-mysqlruby" title="27.11.1 The MySQL/Ruby API">Section 27.11.1, “The MySQL/Ruby API”</a>.</td>
+    </tr><tr>
+      <td scope="row"></td>
+      <td>Ruby/MySQL</td>
+      <td>Native Driver</td>
+      <td>See <a class="xref" href="connectors-apis.html#apis-ruby-rubymysql" title="27.11.2 The Ruby/MySQL API">Section 27.11.2, “The Ruby/MySQL API”</a>.</td>
+    </tr><tr>
+      <td scope="row">Scheme</td>
+      <td><code class="literal">Myscsh</code></td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See
+        <a class="ulink" href="https://github.com/aehrisch/myscsh" target="_top"><code class="literal">Myscsh</code></a>.</td>
+    </tr><tr>
+      <td scope="row">SPL</td>
+      <td><code class="literal">sql_mysql</code></td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See
+        <a class="ulink" href="http://www.clifford.at/spl/spldoc/sql_mysql.html" target="_top"><code class="literal">sql_mysql</code>
+        for SPL</a>.</td>
+    </tr><tr>
+      <td scope="row">Tcl</td>
+      <td>MySQLtcl</td>
+      <td><code class="literal">libmysqlclient</code></td>
+      <td>See <a class="xref" href="connectors-apis.html#apis-tcl" title="27.12 MySQL Tcl API">Section 27.12, “MySQL Tcl API”</a>.</td>
+</tr></tbody></table>
+</div>
+
+</div>
+<br class="table-break">
+<div class="section">
+
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="connector-cpp-info"></a>27.1 MySQL Connector/C++</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415287033712"></a><a class="indexterm" name="idm46415287032672"></a><p>
+    The MySQL Connector/C++ manual is published in standalone form, not
+    as part of the MySQL Reference Manual. For information, see these
+    documents:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        Main manual: <a class="ulink" href="https://dev.mysql.com/doc/connector-cpp/8.0/en/" target="_top">MySQL Connector/C++ 8.0 Developer Guide</a>
+      </p></li><li class="listitem"><p>
+        Release notes:
+        <a class="ulink" href="https://dev.mysql.com/doc/relnotes/connector-cpp/en/" target="_top">MySQL
+        Connector/C++ Release Notes</a>
+</p></li></ul>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="connector-j-info"></a>27.2 MySQL Connector/J</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415287025984"></a><a class="indexterm" name="idm46415287024944"></a><p>
+    The MySQL Connector/J manual is published in standalone form, not as
+    part of the MySQL Reference Manual. For information, see these
+    documents:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        Main manual: <a class="ulink" href="https://dev.mysql.com/doc/connector-j/en/" target="_top">MySQL
+        Connector/J Developer Guide</a>
+      </p></li><li class="listitem"><p>
+        Release notes:
+        <a class="ulink" href="https://dev.mysql.com/doc/relnotes/connector-j/en/" target="_top">MySQL
+        Connector/J Release Notes</a>
+</p></li></ul>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="connector-net-info"></a>27.3 MySQL Connector/NET</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415287018288"></a><p>
+    The MySQL Connector/NET manual is published in standalone form, not as part of
+    the MySQL Reference Manual. For information, see these documents:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        Main manual: <a class="ulink" href="https://dev.mysql.com/doc/connector-net/en/" target="_top">MySQL Connector/NET Developer Guide</a>
+      </p></li><li class="listitem"><p>
+        Release notes:
+        <a class="ulink" href="https://dev.mysql.com/doc/relnotes/connector-net/en/" target="_top">MySQL Connector/NET
+        Release Notes</a>
+</p></li></ul>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="connector-odbc-info"></a>27.4 MySQL Connector/ODBC</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415287011648"></a><p>
+    The MySQL Connector/ODBC manual is published in standalone form, not
+    as part of the MySQL Reference Manual. For information, see these
+    documents:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        Main manual: <a class="ulink" href="https://dev.mysql.com/doc/connector-odbc/en/" target="_top">MySQL Connector/ODBC Developer Guide</a>
+      </p></li><li class="listitem"><p>
+        Release notes:
+        <a class="ulink" href="https://dev.mysql.com/doc/relnotes/connector-odbc/en/" target="_top">MySQL
+        Connector/ODBC Release Notes</a>
+</p></li></ul>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="connector-python-info"></a>27.5 MySQL Connector/Python</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415287005008"></a><a class="indexterm" name="idm46415287003968"></a><p>
+    The MySQL Connector/Python manual is published in standalone form,
+    not as part of the MySQL Reference Manual. For information, see
+    these documents:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        Main manual: <a class="ulink" href="https://dev.mysql.com/doc/connector-python/en/" target="_top">MySQL Connector/Python Developer Guide</a>
+      </p></li><li class="listitem"><p>
+        Release notes:
+        <a class="ulink" href="https://dev.mysql.com/doc/relnotes/connector-python/en/" target="_top">MySQL
+        Connector/Python Release Notes</a>
+</p></li></ul>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="libmysqld"></a>27.6 libmysqld, the Embedded MySQL Server Library</h2>
+
+</div>
+
+</div>
+
+</div>
+<div class="toc">
+<dl class="toc"><dt><span class="section"><a href="connectors-apis.html#libmysqld-compiling">27.6.1 Compiling Programs with libmysqld</a></span></dt><dt><span class="section"><a href="connectors-apis.html#libmysqld-restrictions">27.6.2 Restrictions When Using the Embedded MySQL Server</a></span></dt><dt><span class="section"><a href="connectors-apis.html#libmysqld-options">27.6.3 Options with the Embedded Server</a></span></dt><dt><span class="section"><a href="connectors-apis.html#libmysqld-example">27.6.4 Embedded Server Examples</a></span></dt></dl>
+</div>
+<a class="indexterm" name="idm46415286997568"></a><a class="indexterm" name="idm46415286996528"></a><p>
+    The embedded MySQL server library makes it possible to run a
+    full-featured MySQL server inside a client application. The main
+    benefits are increased speed and more simple management for embedded
+    applications.
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+
+<div class="admon-title">
+Note
+</div>
+<p>
+      The <code class="literal">libmysqld</code> embedded server library is
+      deprecated as of MySQL 5.7.19 and is removed in MySQL 8.0.
+</p>
+</div>
+<p>
+    The embedded server library is based on the client/server version of
+    MySQL, which is written in C/C++. Consequently, the embedded server
+    also is written in C/C++. There is no embedded server available in
+    other languages.
+  </p><p>
+    The API is identical for the embedded MySQL version and the
+    client/server version. To change a threaded application to use the
+    embedded library, you normally only have to add calls to the
+    following functions.
+</p>
+<div class="table">
+<a name="refman-apis-libmysqld-mysql-server-library-embeded-functions"></a><p class="title"><b>Table 27.2 MySQL Embedded Server Library Functions</b></p>
+<div class="table-contents">
+<table summary="MySQL embedded server library functions and descriptions of when the functions should be called."><col width="30%"><col width="70%"><thead><tr>
+        <th scope="col"><p>
+            Function
+          </p></th>
+        <th scope="col"><p>
+            When to Call
+          </p></th>
+      </tr></thead><tbody><tr>
+        <td scope="row"><p>
+            <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-library-init.html" target="_top"><code class="literal">mysql_library_init()</code></a>
+          </p></td>
+        <td><p>
+            Call it before any other MySQL function is called,
+            preferably early in the <code class="literal">main()</code> function.
+          </p></td>
+      </tr><tr>
+        <td scope="row"><p>
+            <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-library-end.html" target="_top"><code class="literal">mysql_library_end()</code></a>
+          </p></td>
+        <td><p>
+            Call it before your program exits.
+          </p></td>
+      </tr><tr>
+        <td scope="row"><p>
+            <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-thread-init.html" target="_top"><code class="literal">mysql_thread_init()</code></a>
+          </p></td>
+        <td><p>
+            Call it in each thread you create that accesses MySQL.
+          </p></td>
+      </tr><tr>
+        <td scope="row"><a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-thread-end.html" target="_top"><code class="literal">mysql_thread_end()</code></a></td>
+        <td>Call it before calling <code class="literal">pthread_exit()</code>.</td>
+</tr></tbody></table>
+</div>
+
+</div>
+<br class="table-break"><p>
+    Then, link your code with <code class="filename">libmysqld.a</code> instead
+    of <code class="filename">libmysqlclient.a</code>. To ensure binary
+    compatibility between your application and the server library,
+    always compile your application against headers for the same series
+    of MySQL that was used to compile the server library. For example,
+    if <code class="literal">libmysqld</code> was compiled against MySQL
+    5.6 headers, do not compile your application against
+    MySQL 5.7 headers, or vice versa.
+  </p><p>
+    Because the
+    <code class="literal">mysql_library_<em class="replaceable"><code>xxx</code></em>()</code>
+    functions are also included in
+    <code class="filename">libmysqlclient.a</code>, you can change between the
+    embedded and the client/server version by just linking your
+    application with the right library. See
+    <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-library-init.html" target="_top">mysql_library_init()</a>.
+  </p><p>
+    One difference between the embedded server and the standalone server
+    is that for the embedded server, authentication for connections is
+    disabled by default.
+</p>
+<div class="section">
+
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="libmysqld-compiling"></a>27.6.1 Compiling Programs with libmysqld</h3>
+</div>
+</div>
+</div>
+<p>
+      In precompiled binary MySQL distributions that include
+      <code class="literal">libmysqld</code>, the embedded server library, MySQL
+      builds the library using the appropriate vendor compiler if there
+      is one.
+    </p><p>
+      To get a <code class="literal">libmysqld</code> library if you build MySQL
+      from source yourself, you should configure MySQL with the
+      <a class="link" href="installing.html#option_cmake_with_embedded_server"><code class="option">-DWITH_EMBEDDED_SERVER=1</code></a> option. See
+      <a class="xref" href="installing.html#source-configuration-options" title="2.9.7 MySQL Source-Configuration Options">Section 2.9.7, “MySQL Source-Configuration Options”</a>.
+    </p><p>
+      When you link your program with <code class="literal">libmysqld</code>, you
+      must also include the system-specific <code class="literal">pthread</code>
+      libraries and some libraries that the MySQL server uses. You can
+      get the full list of libraries by executing <a class="link" href="programs.html#mysql-config" title="4.7.1 mysql_config — Display Options for Compiling Clients"><span class="command"><strong>mysql_config
+      --libmysqld-libs</strong></span></a>.
+    </p><p>
+      The correct flags for compiling and linking a threaded program
+      must be used, even if you do not directly call any thread
+      functions in your code.
+    </p><p>
+      To compile a C program to include the necessary files to embed the
+      MySQL server library into an executable version of a program, the
+      compiler will need to know where to find various files and need
+      instructions on how to compile the program. The following example
+      shows how a program could be compiled from the command line,
+      assuming that you are using <span class="command"><strong>gcc</strong></span>, use the GNU C
+      compiler:
+    </p><pre data-lang="terminal" class="programlisting">gcc mysql_test.c -o mysql_test \
+`/usr/local/mysql/bin/mysql_config --include --libmysqld-libs`
+</pre><p>
+      Immediately following the <span class="command"><strong>gcc</strong></span> command is the
+      name of the C program source file. After it, the
+      <code class="option">-o</code> option is given to indicate that the file name
+      that follows is the name that the compiler is to give to the
+      output file, the compiled program. The next line of code tells the
+      compiler to obtain the location of the include files and libraries
+      and other settings for the system on which it is compiled. The
+      <a class="link" href="programs.html#mysql-config" title="4.7.1 mysql_config — Display Options for Compiling Clients"><span class="command"><strong>mysql_config</strong></span></a> command is contained in backticks,
+      not single quotation marks.
+    </p><p>
+      On some non-<span class="command"><strong>gcc</strong></span> platforms, the embedded library
+      depends on C++ runtime libraries and linking against the embedded
+      library might result in missing-symbol errors. To solve this, link
+      using a C++ compiler or explicitly list the required libraries on
+      the link command line.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="libmysqld-restrictions"></a>27.6.2 Restrictions When Using the Embedded MySQL Server</h3>
+
+</div>
+
+</div>
+
+</div>
+<p>
+      The embedded server has the following limitations:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+          No user-defined functions (UDFs).
+        </p></li><li class="listitem"><p>
+          No stack trace on core dump.
+        </p></li><li class="listitem"><p>
+          You cannot set this up as a master or a slave (no
+          replication).
+        </p></li><li class="listitem"><p>
+          Very large result sets may be unusable on low memory systems.
+        </p></li><li class="listitem"><p>
+          You cannot connect to an embedded server from an outside
+          process with sockets or TCP/IP. However, you can connect to an
+          intermediate application, which in turn can connect to an
+          embedded server on the behalf of a remote client or outside
+          process.
+        </p></li><li class="listitem"><p>
+          <code class="literal">libmysqld</code> does not support encrypted
+          connections. An implication is that if an application linked
+          against <code class="literal">libmysqld</code> establishes a connection
+          to a remote server, the connection cannot be encrypted.
+        </p></li><li class="listitem"><p>
+          <code class="literal">InnoDB</code> is not reentrant in the embedded
+          server and cannot be used for multiple connections, either
+          successively or simultaneously.
+        </p></li><li class="listitem"><p>
+          The Event Scheduler is not available. Because of this, the
+          <a class="link" href="server-administration.html#sysvar_event_scheduler"><code class="literal">event_scheduler</code></a> system
+          variable is disabled.
+        </p></li><li class="listitem"><p>
+          The Performance Schema is not available.
+        </p></li><li class="listitem"><p>
+          The embedded server cannot share the same
+          <a class="link" href="server-administration.html#sysvar_secure_file_priv"><code class="literal">secure_file_priv</code></a> directory
+          with another server. As of MySQL 5.7.8, the default value for
+          this directory can be set at build time with the
+          <a class="link" href="installing.html#option_cmake_install_secure_file_priv_embeddeddir"><code class="option">INSTALL_SECURE_FILE_PRIV_EMBEDDEDDIR</code></a>
+          <span class="command"><strong>CMake</strong></span> option.
+</p></li></ul>
+</div>
+<p>
+      Some of these limitations can be changed by editing the
+      <code class="filename">mysql_embed.h</code> include file and recompiling
+      MySQL.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="libmysqld-options"></a>27.6.3 Options with the Embedded Server</h3>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415286925840"></a><a class="indexterm" name="idm46415286924384"></a><a class="indexterm" name="idm46415286922896"></a><a class="indexterm" name="idm46415286921408"></a><p>
+      Any options that may be given with the <a class="link" href="programs.html#mysqld" title="4.3.1 mysqld — The MySQL Server"><span class="command"><strong>mysqld</strong></span></a>
+      server daemon, may be used with an embedded server library. Server
+      options may be given in an array as an argument to the
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-library-init.html" target="_top"><code class="literal">mysql_library_init()</code></a>, which
+      initializes the server. They also may be given in an option file
+      like <code class="filename">my.cnf</code>. To specify an option file for a
+      C program, use the <a class="link" href="programs.html#option_general_defaults-file"><code class="option">--defaults-file</code></a>
+      option as one of the elements of the second argument of the
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-library-init.html" target="_top"><code class="literal">mysql_library_init()</code></a> function. See
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-library-init.html" target="_top">mysql_library_init()</a>, for more information on the
+      <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/mysql-library-init.html" target="_top"><code class="literal">mysql_library_init()</code></a> function.
+    </p><p>
+      Using option files can make it easier to switch between a
+      client/server application and one where MySQL is embedded. Put
+      common options under the <code class="literal">[server]</code> group. These
+      are read by both MySQL versions. Client/server-specific options
+      should go under the <code class="literal">[mysqld]</code> section. Put
+      options specific to the embedded MySQL server library in the
+      <code class="literal">[embedded]</code> section. Options specific to
+      applications go under section labeled
+      <code class="literal">[ApplicationName_SERVER]</code>. See
+      <a class="xref" href="programs.html#option-files" title="4.2.2.2 Using Option Files">Section 4.2.2.2, “Using Option Files”</a>.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="libmysqld-example"></a>27.6.4 Embedded Server Examples</h3>
+
+</div>
+
+</div>
+
+</div>
+<p>
+      These two example programs should work without any changes on a
+      Linux or FreeBSD system. For other operating systems, minor
+      changes are needed, mostly with file paths. These examples are
+      designed to give enough details for you to understand the problem,
+      without the clutter that is a necessary part of a real
+      application. The first example is very straightforward. The second
+      example is a little more advanced with some error checking. The
+      first is followed by a command-line entry for compiling the
+      program. The second is followed by a GNUmake file that may be used
+      for compiling instead.
+    </p><p>
+      <span class="bold"><strong>Example 1</strong></span>
+    </p><p>
+      <code class="filename">test1_libmysqld.c</code>
+    </p><pre data-lang="c" class="programlisting">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdarg.h&gt;
+#include "mysql.h"
+
+MYSQL *mysql;
+MYSQL_RES *results;
+MYSQL_ROW record;
+
+static char *server_options[] = \
+       { "mysql_test", "--defaults-file=my.cnf", NULL };
+int num_elements = (sizeof(server_options) / sizeof(char *)) - 1;
+
+static char *server_groups[] = { "libmysqld_server",
+                                 "libmysqld_client", NULL };
+
+int main(void)
+{
+   mysql_library_init(num_elements, server_options, server_groups);
+   mysql = mysql_init(NULL);
+   mysql_options(mysql, MYSQL_READ_DEFAULT_GROUP, "libmysqld_client");
+   mysql_options(mysql, MYSQL_OPT_USE_EMBEDDED_CONNECTION, NULL);
+
+   mysql_real_connect(mysql, NULL,NULL,NULL, "database1", 0,NULL,0);
+
+   mysql_query(mysql, "SELECT column1, column2 FROM table1");
+
+   results = mysql_store_result(mysql);
+
+   while((record = mysql_fetch_row(results))) {
+      printf("%s - %s \n", record[0], record[1]);
+   }
+
+   mysql_free_result(results);
+   mysql_close(mysql);
+   mysql_library_end();
+
+   return 0;
+}
+</pre><p>
+      Here is the command line for compiling the above program:
+    </p><pre data-lang="terminal" class="programlisting">gcc test1_libmysqld.c -o test1_libmysqld \
+ `/usr/local/mysql/bin/mysql_config --include --libmysqld-libs`
+</pre><p>
+      <span class="bold"><strong>Example 2</strong></span>
+    </p><p>
+      To try the example, create an <code class="filename">test2_libmysqld</code>
+      directory at the same level as the MySQL source directory. Save
+      the <code class="filename">test2_libmysqld.c</code> source and the
+      <code class="filename">GNUmakefile</code> in the directory, and run GNU
+      <code class="filename">make</code> from inside the
+      <code class="filename">test2_libmysqld</code> directory.
+    </p><p>
+      <code class="filename">test2_libmysqld.c</code>
+    </p><pre data-lang="c" class="programlisting">/*
+ * A simple example client, using the embedded MySQL server library
+*/
+
+#include &lt;mysql.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+MYSQL *db_connect(const char *dbname);
+void db_disconnect(MYSQL *db);
+void db_do_query(MYSQL *db, const char *query);
+
+const char *server_groups[] = {
+  "test2_libmysqld_SERVER", "embedded", "server", NULL
+};
+
+int
+main(int argc, char **argv)
+{
+  MYSQL *one, *two;
+
+  /* mysql_library_init() must be called before any other mysql
+   * functions.
+   *
+   * You can use mysql_library_init(0, NULL, NULL), and it
+   * initializes the server using groups = {
+   *   "server", "embedded", NULL
+   *  }.
+   *
+   * In your $HOME/.my.cnf file, you probably want to put:
+
+[test2_libmysqld_SERVER]
+language = /path/to/source/of/mysql/sql/share/english
+
+   * You could, of course, modify argc and argv before passing
+   * them to this function.  Or you could create new ones in any
+   * way you like.  But all of the arguments in argv (except for
+   * argv[0], which is the program name) should be valid options
+   * for the MySQL server.
+   *
+   * If you link this client against the normal mysqlclient
+   * library, this function is just a stub that does nothing.
+   */
+  mysql_library_init(argc, argv, (char **)server_groups);
+
+  one = db_connect("test");
+  two = db_connect(NULL);
+
+  db_do_query(one, "SHOW TABLE STATUS");
+  db_do_query(two, "SHOW DATABASES");
+
+  mysql_close(two);
+  mysql_close(one);
+
+  /* This must be called after all other mysql functions */
+  mysql_library_end();
+
+  exit(EXIT_SUCCESS);
+}
+
+static void
+die(MYSQL *db, char *fmt, ...)
+{
+  va_list ap;
+  va_start(ap, fmt);
+  vfprintf(stderr, fmt, ap);
+  va_end(ap);
+  (void)putc('\n', stderr);
+  if (db)
+    db_disconnect(db);
+  exit(EXIT_FAILURE);
+}
+
+MYSQL *
+db_connect(const char *dbname)
+{
+  MYSQL *db = mysql_init(NULL);
+  if (!db)
+    die(db, "mysql_init failed: no memory");
+  /*
+   * Notice that the client and server use separate group names.
+   * This is critical, because the server does not accept the
+   * client's options, and vice versa.
+   */
+  mysql_options(db, MYSQL_READ_DEFAULT_GROUP, "test2_libmysqld_CLIENT");
+  if (!mysql_real_connect(db, NULL, NULL, NULL, dbname, 0, NULL, 0))
+    die(db, "mysql_real_connect failed: %s", mysql_error(db));
+
+  return db;
+}
+
+void
+db_disconnect(MYSQL *db)
+{
+  mysql_close(db);
+}
+
+void
+db_do_query(MYSQL *db, const char *query)
+{
+  if (mysql_query(db, query) != 0)
+    goto err;
+
+  if (mysql_field_count(db) &gt; 0)
+  {
+    MYSQL_RES   *res;
+    MYSQL_ROW    row, end_row;
+    int num_fields;
+
+    if (!(res = mysql_store_result(db)))
+      goto err;
+    num_fields = mysql_num_fields(res);
+    while ((row = mysql_fetch_row(res)))
+    {
+      (void)fputs("&gt;&gt; ", stdout);
+      for (end_row = row + num_fields; row &lt; end_row; ++row)
+        (void)printf("%s\t", row ? (char*)*row : "NULL");
+      (void)fputc('\n', stdout);
+    }
+    (void)fputc('\n', stdout);
+    mysql_free_result(res);
+  }
+  else
+    (void)printf("Affected rows: %lld\n", mysql_affected_rows(db));
+
+  return;
+
+err:
+  die(db, "db_do_query failed: %s [%s]", mysql_error(db), query);
+}
+</pre><p>
+      <code class="filename">GNUmakefile</code>
+    </p><pre data-lang="terminal" class="programlisting"># This assumes the MySQL software is installed in /usr/local/mysql
+inc      := /usr/local/mysql/include/mysql
+lib      := /usr/local/mysql/lib
+
+# If you have not installed the MySQL software yet, try this instead
+#inc      := $(HOME)/mysql-5.7/include
+#lib      := $(HOME)/mysql-5.7/libmysqld
+
+CC       := gcc
+CPPFLAGS := -I$(inc) -D_THREAD_SAFE -D_REENTRANT
+CFLAGS   := -g -W -Wall
+LDFLAGS  := -static
+# You can change -lmysqld to -lmysqlclient to use the
+# client/server library
+LDLIBS    = -L$(lib) -lmysqld -lm -ldl -lcrypt
+
+ifneq (,$(shell grep FreeBSD /COPYRIGHT 2&gt;/dev/null))
+# FreeBSD
+LDFLAGS += -pthread
+else
+# Assume Linux
+LDLIBS += -lpthread
+endif
+
+# This works for simple one-file test programs
+sources := $(wildcard *.c)
+objects := $(patsubst %c,%o,$(sources))
+targets := $(basename $(sources))
+
+all: $(targets)
+
+clean:
+        rm -f $(targets) $(objects) *.core
+</pre>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="c-api-info"></a>27.7 MySQL C API</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415286883120"></a><a class="indexterm" name="idm46415286882080"></a><p>
+    The MySQL C API Developer Guide is published in standalone form, not
+    as part of the MySQL Reference Manual. See <a class="ulink" href="https://dev.mysql.com/doc/c-api/5.7/en/" target="_top">MySQL 5.7 C API Developer Guide</a>.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="apis-php-info"></a>27.8 MySQL PHP API</h2>
+
+</div>
+
+</div>
+
+</div>
+<p>
+    The MySQL PHP API manual is now published in standalone form, not as
+    part of the MySQL Reference Manual. See <a class="ulink" href="https://dev.mysql.com/doc/apis-php/en/" target="_top">MySQL and PHP</a>.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="apis-perl"></a>27.9 MySQL Perl API</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415286875424"></a><a class="indexterm" name="idm46415286873968"></a><a class="indexterm" name="idm46415286872896"></a><a class="indexterm" name="idm46415286871824"></a><p>
+    The Perl <code class="literal">DBI</code> module provides a generic interface
+    for database access. You can write a DBI script that works with many
+    different database engines without change. To use DBI with MySQL,
+    install the following:
+</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1"><li class="listitem"><p>
+        The <code class="literal">DBI</code> module.
+      </p></li><li class="listitem"><p>
+        The <code class="literal">DBD::mysql</code> module. This is the DataBase
+        Driver (DBD) module for Perl.
+      </p></li><li class="listitem"><p>
+        Optionally, the DBD module for any other type of database server
+        you want to access.
+</p></li></ol>
+</div>
+<p>
+    Perl DBI is the recommended Perl interface. It replaces an older
+    interface called <code class="literal">mysqlperl</code>, which should be
+    considered obsolete.
+  </p><p>
+    These sections contain information about using Perl with MySQL and
+    writing MySQL applications in Perl:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        For installation instructions for Perl DBI support, see
+        <a class="xref" href="installing.html#perl-support" title="2.13 Perl Installation Notes">Section 2.13, “Perl Installation Notes”</a>.
+      </p></li><li class="listitem"><p>
+        For an example of reading options from option files, see
+        <a class="xref" href="server-administration.html#multiple-server-clients" title="5.7.4 Using Client Programs in a Multiple-Server Environment">Section 5.7.4, “Using Client Programs in a Multiple-Server Environment”</a>.
+      </p></li><li class="listitem"><p>
+        For secure coding tips, see
+        <a class="xref" href="security.html#security-guidelines" title="6.1.1 Security Guidelines">Section 6.1.1, “Security Guidelines”</a>.
+      </p></li><li class="listitem"><p>
+        For debugging tips, see <a class="xref" href="server-administration.html#using-gdb-on-mysqld" title="5.8.1.4 Debugging mysqld under gdb">Section 5.8.1.4, “Debugging mysqld under gdb”</a>.
+      </p></li><li class="listitem"><p>
+        For some Perl-specific environment variables, see
+        <a class="xref" href="programs.html#environment-variables" title="4.9 Environment Variables">Section 4.9, “Environment Variables”</a>.
+      </p></li><li class="listitem"><p>
+        For considerations for running on macOS, see
+        <a class="xref" href="installing.html#osx-installation" title="2.4 Installing MySQL on macOS">Section 2.4, “Installing MySQL on macOS”</a>.
+      </p></li><li class="listitem"><p>
+        For ways to quote string literals, see
+        <a class="xref" href="language-structure.html#string-literals" title="9.1.1 String Literals">Section 9.1.1, “String Literals”</a>.
+</p></li></ul>
+</div>
+<p>
+    DBI information is available at the command line, online, or in
+    printed form:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        Once you have the <code class="literal">DBI</code> and
+        <code class="literal">DBD::mysql</code> modules installed, you can get
+        information about them at the command line with the
+        <code class="literal">perldoc</code> command:
+      </p><pre data-lang="terminal" class="programlisting">shell&gt; <strong class="userinput"><code>perldoc DBI</code></strong>
+shell&gt; <strong class="userinput"><code>perldoc DBI::FAQ</code></strong>
+shell&gt; <strong class="userinput"><code>perldoc DBD::mysql</code></strong>
+</pre><p>
+        You can also use <code class="literal">pod2man</code>,
+        <code class="literal">pod2html</code>, and so on to translate this
+        information into other formats.
+      </p></li><li class="listitem"><p>
+        For online information about Perl DBI, visit the DBI website,
+        <a class="ulink" href="http://dbi.perl.org/" target="_top">http://dbi.perl.org/</a>. That site hosts a general
+        DBI mailing list.
+      </p></li><li class="listitem"><p>
+        For printed information, the official DBI book is
+        <em class="citetitle">Programming the Perl DBI</em> (Alligator
+        Descartes and Tim Bunce, O'Reilly &amp; Associates, 2000).
+        Information about the book is available at the DBI website,
+        <a class="ulink" href="http://dbi.perl.org/" target="_top">http://dbi.perl.org/</a>.
+</p></li></ul>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="apis-python"></a>27.10 MySQL Python API</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415286836784"></a><p>
+    <code class="literal">MySQLdb</code> is a third-party driver that provides
+    MySQL support for Python, compliant with the Python DB API version
+    2.0. It can be found at
+    <a class="ulink" href="http://sourceforge.net/projects/mysql-python/" target="_top">http://sourceforge.net/projects/mysql-python/</a>.
+  </p><p>
+    The new MySQL Connector/Python component provides an interface to
+    the same Python API, and is built into the MySQL Server and
+    supported by Oracle. See <a class="ulink" href="https://dev.mysql.com/doc/connector-python/en/" target="_top">MySQL Connector/Python Developer Guide</a> for
+    details on the Connector, as well as coding guidelines for Python
+    applications and sample Python code.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="apis-ruby"></a>27.11 MySQL Ruby APIs</h2>
+
+</div>
+
+</div>
+
+</div>
+<div class="toc">
+<dl class="toc"><dt><span class="section"><a href="connectors-apis.html#apis-ruby-mysqlruby">27.11.1 The MySQL/Ruby API</a></span></dt><dt><span class="section"><a href="connectors-apis.html#apis-ruby-rubymysql">27.11.2 The Ruby/MySQL API</a></span></dt></dl>
+</div>
+<a class="indexterm" name="idm46415286830480"></a><p>
+    Two APIs are available for Ruby programmers developing MySQL
+    applications:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+        The MySQL/Ruby API is based on the
+        <code class="literal">libmysqlclient</code> API library. For information
+        on installing and using the MySQL/Ruby API, see
+        <a class="xref" href="connectors-apis.html#apis-ruby-mysqlruby" title="27.11.1 The MySQL/Ruby API">Section 27.11.1, “The MySQL/Ruby API”</a>.
+      </p></li><li class="listitem"><p>
+        The Ruby/MySQL API is written to use the native MySQL network
+        protocol (a native driver). For information on installing and
+        using the Ruby/MySQL API, see
+        <a class="xref" href="connectors-apis.html#apis-ruby-rubymysql" title="27.11.2 The Ruby/MySQL API">Section 27.11.2, “The Ruby/MySQL API”</a>.
+</p></li></ul>
+</div>
+<p>
+    For background and syntax information about the Ruby language, see
+    <a class="ulink" href="http://www.ruby-lang.org" target="_top">Ruby Programming
+    Language</a>.
+</p>
+<div class="section">
+
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="apis-ruby-mysqlruby"></a>27.11.1 The MySQL/Ruby API</h3>
+</div>
+</div>
+</div>
+<p>
+      The MySQL/Ruby module provides access to MySQL databases using
+      Ruby through <code class="literal">libmysqlclient</code>.
+    </p><p>
+      For information on installing the module, and the functions
+      exposed, see
+      <a class="ulink" href="http://tmtm.org/en/mysql/ruby/" target="_top">MySQL/Ruby</a>.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="apis-ruby-rubymysql"></a>27.11.2 The Ruby/MySQL API</h3>
+
+</div>
+
+</div>
+
+</div>
+<p>
+      The Ruby/MySQL module provides access to MySQL databases using
+      Ruby through a native driver interface using the MySQL network
+      protocol.
+    </p><p>
+      For information on installing the module, and the functions
+      exposed, see
+      <a class="ulink" href="http://tmtm.org/en/ruby/mysql/README_en.html" target="_top">Ruby/MySQL</a>.
+</p>
+</div>
+
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="apis-tcl"></a>27.12 MySQL Tcl API</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415286815184"></a><p>
+    <code class="literal">MySQLtcl</code> is a simple API for accessing a MySQL
+    database server from the
+    <a class="ulink" href="http://en.wikipedia.org/wiki/Tcl" target="_top">Tcl programming
+    language</a>. It can be found at
+    <a class="ulink" href="http://www.xdobry.de/mysqltcl/" target="_top">http://www.xdobry.de/mysqltcl/</a>.
+</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both"><a name="apis-eiffel"></a>27.13 MySQL Eiffel Wrapper</h2>
+
+</div>
+
+</div>
+
+</div>
+<a class="indexterm" name="idm46415286810144"></a><a class="indexterm" name="idm46415286809104"></a><p>
+    Eiffel MySQL is an interface to the MySQL database server using the
+    <a class="ulink" href="http://en.wikipedia.org/wiki/Eiffel_(programming_language)" target="_top">Eiffel
+    programming language</a>, written by Michael Ravits. It can be
+    found at
+    <a class="ulink" href="http://efsa.sourceforge.net/archive/ravits/mysql.htm" target="_top">http://efsa.sourceforge.net/archive/ravits/mysql.htm</a>.
+</p>
+</div>
+
+</div>
+<div class="copyright-footer">
+
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left"><a accesskey="p" href="sys-schema.html">Prev</a></td>
+<td width="20%" align="center"><a accesskey="u" href="">Up</a></td>
+<td width="40%" align="right"> <a accesskey="n" href="mysql-enterprise.html">Next</a></td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top">Chapter 26 MySQL sys Schema</td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top">Chapter 28 MySQL Enterprise Edition</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 4 Global Error Message Reference</title><link rel="stylesheet" type="text/css" href="mvl.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="MySQL 5.7 Error Message Reference"><link rel="up" href="index.html" title="MySQL 5.7 Error Message Reference"><link rel="prev" href="client-error-reference.html" title="Chapter 3 Client Error Message Reference"><link rel="next" href="ix01.html" title="Index"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 4 Global Error Message Reference</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="client-error-reference.html">Previous</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ix01.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="global-error-reference"></a>Chapter 4 Global Error Message Reference</h1></div></div></div><p>
+      This document lists <span class="quote">“<span class="quote">global</span>”</span> error messages that are
+      shared in the sense that they can be produced by the MySQL server
+      or by MySQL client programs. These errors have error codes in the
+      range from 1 to 999.
+    </p><p>
+      Each global error message includes an error code, SQLSTATE value,
+      and message string, as described in
+      <a class="ulink" href="https://dev.mysql.com/doc/refman/5.7/en/error-message-components.html" target="_top">Error Message Sources and Components</a>. These components are
+      available as described in <a class="ulink" href="https://dev.mysql.com/doc/refman/5.7/en/error-interfaces.html" target="_top">Error Information Interfaces</a>. For
+      global errors, the SQLSTATE value is always
+      <code class="literal">'HY000'</code> (general error), so it is not
+      meaningful for distinguishing one client error from another.
+    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><a name="error_ee_cantcreatefile"></a>
+      Error number: <code class="literal">1</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cantcreatefile"><code class="literal">EE_CANTCREATEFILE</code></a>;
+    </p><p>
+      Message: Can't create/write to file '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627406928"></a><a class="indexterm" name="idm45780627405840"></a></li><li class="listitem"><p><a name="error_ee_read"></a>
+      Error number: <code class="literal">2</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_read"><code class="literal">EE_READ</code></a>;
+    </p><p>
+      Message: Error reading file '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627400640"></a><a class="indexterm" name="idm45780627399568"></a></li><li class="listitem"><p><a name="error_ee_write"></a>
+      Error number: <code class="literal">3</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_write"><code class="literal">EE_WRITE</code></a>;
+    </p><p>
+      Message: Error writing file '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627394368"></a><a class="indexterm" name="idm45780627393296"></a></li><li class="listitem"><p><a name="error_ee_badclose"></a>
+      Error number: <code class="literal">4</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_badclose"><code class="literal">EE_BADCLOSE</code></a>;
+    </p><p>
+      Message: Error on close of '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627388096"></a><a class="indexterm" name="idm45780627387024"></a></li><li class="listitem"><p><a name="error_ee_outofmemory"></a>
+      Error number: <code class="literal">5</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_outofmemory"><code class="literal">EE_OUTOFMEMORY</code></a>;
+    </p><p>
+      Message: Out of memory (Needed %u bytes)
+    </p><a class="indexterm" name="idm45780627381776"></a><a class="indexterm" name="idm45780627380688"></a></li><li class="listitem"><p><a name="error_ee_delete"></a>
+      Error number: <code class="literal">6</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_delete"><code class="literal">EE_DELETE</code></a>;
+    </p><p>
+      Message: Error on delete of '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627375424"></a><a class="indexterm" name="idm45780627374352"></a></li><li class="listitem"><p><a name="error_ee_link"></a>
+      Error number: <code class="literal">7</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_link"><code class="literal">EE_LINK</code></a>;
+    </p><p>
+      Message: Error on rename of '%s' to '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627369200"></a><a class="indexterm" name="idm45780627368128"></a></li><li class="listitem"><p><a name="error_ee_eoferr"></a>
+      Error number: <code class="literal">9</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_eoferr"><code class="literal">EE_EOFERR</code></a>;
+    </p><p>
+      Message: Unexpected EOF found when reading file '%s' (Errcode: %d
+      - %s)
+    </p><a class="indexterm" name="idm45780627362832"></a><a class="indexterm" name="idm45780627361760"></a></li><li class="listitem"><p><a name="error_ee_cantlock"></a>
+      Error number: <code class="literal">10</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cantlock"><code class="literal">EE_CANTLOCK</code></a>;
+    </p><p>
+      Message: Can't lock file (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627356576"></a><a class="indexterm" name="idm45780627355504"></a></li><li class="listitem"><p><a name="error_ee_cantunlock"></a>
+      Error number: <code class="literal">11</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cantunlock"><code class="literal">EE_CANTUNLOCK</code></a>;
+    </p><p>
+      Message: Can't unlock file (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627350176"></a><a class="indexterm" name="idm45780627349088"></a></li><li class="listitem"><p><a name="error_ee_dir"></a>
+      Error number: <code class="literal">12</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_dir"><code class="literal">EE_DIR</code></a>;
+    </p><p>
+      Message: Can't read dir of '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627343824"></a><a class="indexterm" name="idm45780627342752"></a></li><li class="listitem"><p><a name="error_ee_stat"></a>
+      Error number: <code class="literal">13</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_stat"><code class="literal">EE_STAT</code></a>;
+    </p><p>
+      Message: Can't get stat of '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627337488"></a><a class="indexterm" name="idm45780627336416"></a></li><li class="listitem"><p><a name="error_ee_cant_chsize"></a>
+      Error number: <code class="literal">14</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cant_chsize"><code class="literal">EE_CANT_CHSIZE</code></a>;
+    </p><p>
+      Message: Can't change size of file (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627331200"></a><a class="indexterm" name="idm45780627330112"></a></li><li class="listitem"><p><a name="error_ee_cant_open_stream"></a>
+      Error number: <code class="literal">15</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cant_open_stream"><code class="literal">EE_CANT_OPEN_STREAM</code></a>;
+    </p><p>
+      Message: Can't open stream from handle (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627324720"></a><a class="indexterm" name="idm45780627323680"></a></li><li class="listitem"><p><a name="error_ee_getwd"></a>
+      Error number: <code class="literal">16</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_getwd"><code class="literal">EE_GETWD</code></a>;
+    </p><p>
+      Message: Can't get working directory (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627318480"></a><a class="indexterm" name="idm45780627317408"></a></li><li class="listitem"><p><a name="error_ee_setwd"></a>
+      Error number: <code class="literal">17</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_setwd"><code class="literal">EE_SETWD</code></a>;
+    </p><p>
+      Message: Can't change dir to '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627312080"></a><a class="indexterm" name="idm45780627311008"></a></li><li class="listitem"><p><a name="error_ee_link_warning"></a>
+      Error number: <code class="literal">18</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_link_warning"><code class="literal">EE_LINK_WARNING</code></a>;
+    </p><p>
+      Message: Warning: '%s' had %d links
+    </p><a class="indexterm" name="idm45780627305872"></a><a class="indexterm" name="idm45780627304784"></a></li><li class="listitem"><p><a name="error_ee_open_warning"></a>
+      Error number: <code class="literal">19</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_open_warning"><code class="literal">EE_OPEN_WARNING</code></a>;
+    </p><p>
+      Message: Warning: %d files and %d streams is left open
+    </p><a class="indexterm" name="idm45780627299632"></a><a class="indexterm" name="idm45780627298544"></a></li><li class="listitem"><p><a name="error_ee_disk_full"></a>
+      Error number: <code class="literal">20</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_disk_full"><code class="literal">EE_DISK_FULL</code></a>;
+    </p><p>
+      Message: Disk is full writing '%s' (Errcode: %d - %s). Waiting for
+      someone to free space...
+    </p><a class="indexterm" name="idm45780627293296"></a><a class="indexterm" name="idm45780627292224"></a></li><li class="listitem"><p><a name="error_ee_cant_mkdir"></a>
+      Error number: <code class="literal">21</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cant_mkdir"><code class="literal">EE_CANT_MKDIR</code></a>;
+    </p><p>
+      Message: Can't create directory '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627287072"></a><a class="indexterm" name="idm45780627285984"></a></li><li class="listitem"><p><a name="error_ee_unknown_charset"></a>
+      Error number: <code class="literal">22</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_unknown_charset"><code class="literal">EE_UNKNOWN_CHARSET</code></a>;
+    </p><p>
+      Message: Character set '%s' is not a compiled character set and is
+      not specified in the '%s' file
+    </p><a class="indexterm" name="idm45780627280624"></a><a class="indexterm" name="idm45780627279584"></a></li><li class="listitem"><p><a name="error_ee_out_of_fileresources"></a>
+      Error number: <code class="literal">23</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_out_of_fileresources"><code class="literal">EE_OUT_OF_FILERESOURCES</code></a>;
+    </p><p>
+      Message: Out of resources when opening file '%s' (Errcode: %d -
+      %s)
+    </p><a class="indexterm" name="idm45780627274176"></a><a class="indexterm" name="idm45780627273136"></a></li><li class="listitem"><p><a name="error_ee_cant_readlink"></a>
+      Error number: <code class="literal">24</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cant_readlink"><code class="literal">EE_CANT_READLINK</code></a>;
+    </p><p>
+      Message: Can't read value for symlink '%s' (Error %d - %s)
+    </p><a class="indexterm" name="idm45780627267984"></a><a class="indexterm" name="idm45780627266896"></a></li><li class="listitem"><p><a name="error_ee_cant_symlink"></a>
+      Error number: <code class="literal">25</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cant_symlink"><code class="literal">EE_CANT_SYMLINK</code></a>;
+    </p><p>
+      Message: Can't create symlink '%s' pointing at '%s' (Error %d -
+      %s)
+    </p><a class="indexterm" name="idm45780627261616"></a><a class="indexterm" name="idm45780627260528"></a></li><li class="listitem"><p><a name="error_ee_realpath"></a>
+      Error number: <code class="literal">26</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_realpath"><code class="literal">EE_REALPATH</code></a>;
+    </p><p>
+      Message: Error on realpath() on '%s' (Error %d - %s)
+    </p><a class="indexterm" name="idm45780627255328"></a><a class="indexterm" name="idm45780627254256"></a></li><li class="listitem"><p><a name="error_ee_sync"></a>
+      Error number: <code class="literal">27</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_sync"><code class="literal">EE_SYNC</code></a>;
+    </p><p>
+      Message: Can't sync file '%s' to disk (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627249056"></a><a class="indexterm" name="idm45780627247984"></a></li><li class="listitem"><p><a name="error_ee_unknown_collation"></a>
+      Error number: <code class="literal">28</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_unknown_collation"><code class="literal">EE_UNKNOWN_COLLATION</code></a>;
+    </p><p>
+      Message: Collation '%s' is not a compiled collation and is not
+      specified in the '%s' file
+    </p><a class="indexterm" name="idm45780627242544"></a><a class="indexterm" name="idm45780627241504"></a></li><li class="listitem"><p><a name="error_ee_filenotfound"></a>
+      Error number: <code class="literal">29</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_filenotfound"><code class="literal">EE_FILENOTFOUND</code></a>;
+    </p><p>
+      Message: File '%s' not found (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627236176"></a><a class="indexterm" name="idm45780627235088"></a></li><li class="listitem"><p><a name="error_ee_file_not_closed"></a>
+      Error number: <code class="literal">30</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_file_not_closed"><code class="literal">EE_FILE_NOT_CLOSED</code></a>;
+    </p><p>
+      Message: File '%s' (fileno: %d) was not closed
+    </p><a class="indexterm" name="idm45780627229776"></a><a class="indexterm" name="idm45780627228736"></a></li><li class="listitem"><p><a name="error_ee_change_ownership"></a>
+      Error number: <code class="literal">31</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_change_ownership"><code class="literal">EE_CHANGE_OWNERSHIP</code></a>;
+    </p><p>
+      Message: Can't change ownership of the file '%s' (Errcode: %d -
+      %s)
+    </p><a class="indexterm" name="idm45780627223392"></a><a class="indexterm" name="idm45780627222352"></a></li><li class="listitem"><p><a name="error_ee_change_permissions"></a>
+      Error number: <code class="literal">32</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_change_permissions"><code class="literal">EE_CHANGE_PERMISSIONS</code></a>;
+    </p><p>
+      Message: Can't change permissions of the file '%s' (Errcode: %d -
+      %s)
+    </p><a class="indexterm" name="idm45780627217056"></a><a class="indexterm" name="idm45780627216016"></a></li><li class="listitem"><p><a name="error_ee_cant_seek"></a>
+      Error number: <code class="literal">33</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_cant_seek"><code class="literal">EE_CANT_SEEK</code></a>;
+    </p><p>
+      Message: Can't seek in file '%s' (Errcode: %d - %s)
+    </p><a class="indexterm" name="idm45780627210848"></a><a class="indexterm" name="idm45780627209776"></a></li><li class="listitem"><p><a name="error_ee_capacity_exceeded"></a>
+      Error number: <code class="literal">34</code>; Symbol:
+      <a class="link" href="global-error-reference.html#error_ee_capacity_exceeded"><code class="literal">EE_CAPACITY_EXCEEDED</code></a>;
+    </p><p>
+      Message: Memory capacity exceeded (capacity %llu bytes)
+    </p><a class="indexterm" name="idm45780627204448"></a><a class="indexterm" name="idm45780627203408"></a><p>
+      <a class="link" href="global-error-reference.html#error_ee_capacity_exceeded"><code class="literal">EE_CAPACITY_EXCEEDED</code></a> was added in
+      5.7.9.
+    </p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="client-error-reference.html">Previous</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ix01.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3 Client Error Message Reference </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Index</td></tr></table></div><div class="copyright-footer"></div></body></html>

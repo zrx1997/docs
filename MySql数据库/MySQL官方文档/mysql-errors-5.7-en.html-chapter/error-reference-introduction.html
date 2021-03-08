@@ -1,0 +1,39 @@
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 1 MySQL Error Reference</title><link rel="stylesheet" type="text/css" href="mvl.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="MySQL 5.7 Error Message Reference"><link rel="up" href="index.html" title="MySQL 5.7 Error Message Reference"><link rel="prev" href="preface.html" title="Preface and Legal Notices"><link rel="next" href="server-error-reference.html" title="Chapter 2 Server Error Message Reference"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 1 MySQL Error Reference</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="preface.html">Previous</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="server-error-reference.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="error-reference-introduction"></a>Chapter 1 MySQL Error Reference</h1></div></div></div><p>
+      This document provides a reference for the various types of error
+      messages in MySQL:
+    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+          Error messages produced only by the server:
+          <a class="xref" href="server-error-reference.html" title="Chapter 2 Server Error Message Reference">Chapter 2, <i>Server Error Message Reference</i></a>
+        </p><p>
+          On the server side, error messages may occur during the
+          startup and shutdown processes, as a result of issues that
+          occur during SQL statement execution, and so forth.
+        </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>
+              The MySQL server writes some error messages to its error
+              log. These indicate issues of interest to database
+              administrators or that require DBA action.
+            </p></li><li class="listitem"><p>
+              The server sends other error messages to client programs.
+              These indicate issues pertaining only to a particular
+              client. The MySQL client library takes errors received
+              from the server and makes them available to the host
+              client program.
+            </p></li></ul></div></li><li class="listitem"><p>
+          Error messages that originate only from within the MySQL
+          client library: <a class="xref" href="client-error-reference.html" title="Chapter 3 Client Error Message Reference">Chapter 3, <i>Client Error Message Reference</i></a>
+        </p><p>
+          Client-side error messages are generated from within the MySQL
+          client library, usually involving problems communicating with
+          the server.
+        </p></li><li class="listitem"><p>
+          Error messages that are shared between the server and the
+          client library: <a class="xref" href="global-error-reference.html" title="Chapter 4 Global Error Message Reference">Chapter 4, <i>Global Error Message Reference</i></a>
+        </p><p>
+          Some <span class="quote">“<span class="quote">global</span>”</span> error messages are shared in the
+          sense that they can be produced by the MySQL server or by
+          MySQL client programs.
+        </p></li></ul></div><p>
+      For a description of the types of error information MySQL provides
+      and how to obtain information about them, see
+      <a class="ulink" href="https://dev.mysql.com/doc/refman/5.7/en/error-handling.html" target="_top">Error Messages and Common Problems</a>, in <a class="ulink" href="https://dev.mysql.com/doc/refman/5.7/en/" target="_top">MySQL 5.7 Reference Manual</a>.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="preface.html">Previous</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="server-error-reference.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Preface and Legal Notices </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 2 Server Error Message Reference</td></tr></table></div><div class="copyright-footer"></div></body></html>
