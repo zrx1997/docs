@@ -1,0 +1,96 @@
+代码上线
+git配置当前使用用户信息
+git config --global user.name 'lzy'
+git config --global user.email 'lzy@qq.com'
+git config --global color.ui true
+
+[root@git ~]# git config --list		# 查看当前的全局配置
+user.name=lzy
+user.email=lzy@qq.com
+color.ui=true
+
+[root@git ~]# cat .gitconfig 		# 全局生成的隐藏配置文件
+[user]
+	name = lzy
+	email = lzy@qq.com
+[color]
+	ui = true
+	
+	
+git初始化 
+
+[root@git ~]# mkdir git_data
+[root@git ~]# cd git_data/
+[root@git git_data]# ll
+total 0
+[root@git git_data]# git init			# 初始化当前目录为git仓库
+Initialized empty Git repository in /root/git_data/.git/
+
+
+
+
+git init      			初始化仓库
+git status    			查看仓库的状态信息
+git add  file 		  	将新的文件提交到暂存区
+git rm --cached file  	删除暂存的内容
+git commit -m "newfile a" 提交暂存区的内容到本地仓库   
+git commit -am "modifiled b.txt ->>cccc" 如果仓库中已经存在当前文件 修改文件后 不需要提交到暂存区直接可以提交到本地仓库
+git checkout -- b		将暂存区的文件覆盖工作目录
+git rm -f b			    同时删除工作区域和暂存区域的内容
+git mv b b.txt          修改名称
+git diff 				默认比较的是工作目录和暂存区
+git diff --cached		比对的是暂存区和本地仓库
+git add . 				提交工作目录所有的文件到暂存区
+git log 				查看历史的所有commit提交
+git log --oneline		一行显示所有的commit提交
+git log --oneline --decorate	查看当前的指针位置
+git log -1				显示最近的1条commit
+git log -p 				显示所有改动过的内容详细信息
+
+
+
+
+
+
+
+删除文件 如果文件在缓存区中 可以将暂存区的内容覆盖到工作区
+[root@git git_data]# git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   b
+#
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    b
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	c
+[root@git git_data]# git checkout -- b
+[root@git git_data]# ll
+total 0
+-rw-r--r-- 1 root root 0 Oct 23 11:08 a
+-rw-r--r-- 1 root root 0 Oct 23 11:16 b
+-rw-r--r-- 1 root root 0 Oct 23 11:08 c
+------------------------------------------------------------------
+
+
+修改名称 
+[root@git git_data]# git mv b b.txt		# 修改的是工作目录和暂存区
+[root@git git_data]# git commit -m "b-->b.txt"  # 直接使用commit提交到本地仓库
+
+
+
+
+
+
+
+
+
+
+

@@ -139,6 +139,61 @@ for url in img_lst:
 ```
 图片懒加载，
 	图片的img标签中应用了伪属性，只有当触发指定的事件后，伪属性才能变成真正的属性名称
+	
+什么是图片懒加载：	
+	是一种反爬机制,图片懒加载是一种网页优化技术。图片作为一种网络资源，在被请求时也与普通静态资源一样，将占用网络资源，而一次性将整个页面的所有图片加载完，将大大增加页面的首屏加载时间。为了解决这种问题，通过前后端配合，使图片仅在浏览器当前视窗内出现时才加载该图片，达到减少首屏图片请求数的技术就被称为“图片懒加载”
+	
+如何实现图片懒加载
+	在网页源码中，在img标签中首先会使用一个“伪属性”（通常使用src2，original…）去存放真正的图片链接而并非是直接存放在src属性中。当图片出现到页面的可视化区域中，会动态将伪属性替换成src属性，完成图片的加载。
+
+```
+
+#### 案例：爬取站长之家的图片素材
+
+```python
+# 图片懒加载案例
+
+import scrapy
+import requests
+headers={
+'USER_AGENT':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'
+}
+
+class ImgzzSpider(scrapy.Spider):
+    name = 'imgzz'
+
+    start_urls = ['http://sc.chinaz.com/tupian/']
+
+    def parse(self, response):
+        src = response.xpath('//*[@id="container"]/div/div[1]/a/img/@src').extract()
+	    print(src) # 打印结果为空,这里的图片属性就应用的图片懒加载技术,其实图片的真正的src不是图片真正的属性
+        for url in src:
+            name = url.split('/')[-1]
+            img = requests.get(url=url,headers=headers).content
+            with open(name,'wb') as f:
+                f.write(img)
+     
+# 修正后
+
+import scrapy
+import requests
+headers={
+'USER_AGENT':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'
+}
+
+class ImgzzSpider(scrapy.Spider):
+    name = 'imgzz'
+
+    start_urls = ['http://sc.chinaz.com/tupian/']
+
+    def parse(self, response):
+        src = response.xpath('//*[@id="container"]/div/div[1]/a/img/@src2').extract() #改为图片的真正属性
+	    print(src) 
+        for url in src:
+            name = url.split('/')[-1]
+            img = requests.get(url=url,headers=headers).content
+            with open(name,'wb') as f:
+                f.write(img)
 ```
 
 
@@ -151,6 +206,12 @@ for url in img_lst:
 robots.txt协议
     指定了网站中可爬和不可爬的目录
     没有采用强硬的相关机制阻止爬虫的爬取
+  
+参考链接
+	https://developers.google.com/search/docs/advanced/robots/robots_txt
+
+
+
 ```
 
 
@@ -266,6 +327,10 @@ tree.xpath('//*[@id="ipsearchresult"]//text()')
 ```Python
 需求：
 	对一个网站发起高频请求，然后让其将本机ip加入黑名单，构建代理池处理
+
+如何处理动态变化的请求参数
+    将动态变化的请求参数隐藏在前台页面中
+    基于抓包工具进行全局搜索
 
 ```
 

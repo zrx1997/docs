@@ -4,8 +4,11 @@ Selenium自动化框架
 - 环境安装:pip install selenium
 - 下载浏览器的驱动程序(下载高版本的驱动)
     - http://npm.taobao.org/mirrors/chromedriver/
+    - http://chromedriver.storage.googleapis.com/index.html
 
 
+
+#### Selenium简单使用
 
 ```Python
 # 简单使用
@@ -39,7 +42,7 @@ bro.quit()
 
 
 
-selenium和爬虫之间的关联
+#### selenium和爬虫之间的关联
 
 - 可以便捷的捕获到动态加载的数据(可见即可得)
 - 可以实现模拟登陆
@@ -86,7 +89,7 @@ from selenium.webdriver import ActionChains
 
 
 
-```
+```python
 bro = webdriver.Chrome(executable_path='./chromedriver.exe')
 bro.get('https://www.runoob.com/try/try.php?filename=jqueryui-api-droppable')
 sleep(1)

@@ -1,7 +1,8 @@
 import random
+import time
 def yanzhengma():
     strvar = ""
-    for i in range(4):
+    for i in range(6):
         s_char = chr(random.randrange(97, 123))
         b_char = chr(random.randrange(65, 91))
         num = str(random.randrange(10))
@@ -11,3 +12,4 @@ def yanzhengma():
 
 res = yanzhengma()
 print(res)
+time.sleep(3)
