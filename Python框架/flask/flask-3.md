@@ -103,6 +103,10 @@ $ mysql -uroot -p123
 mysql > create database students charset=utf8mb4;
 ```
 
+SQLAlchemy支持多种数据库连接操作，但是需要安装相对应的驱动程序，具体参考官方文档
+
+​		https://docs.sqlalchemy.org/en/13/
+
 
 
 ### 常用的SQLAlchemy字段类型
@@ -1595,5 +1599,4 @@ if __name__ == '__main__':
     print( app.url_map )
     app.run()
 ```
-
 
