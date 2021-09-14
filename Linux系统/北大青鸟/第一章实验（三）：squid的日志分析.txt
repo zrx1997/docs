@@ -1,0 +1,68 @@
+第一章实验（三）：squid的日志分析
+步骤：
+1.安装sarg：
+2.配置sarg的配置文件；
+3.优化sarg服务并启动服务生成记录；
+4.计划任务+脚本实现自动生成记录；
+4.客户端访问统计页面测试；
+
+1.安装sarg：
+[root@localhost ~]# yum -y install gd gd-devel  httpd
+[root@localhost ~]# mkdir /var/log/sarg
+[root@localhost ~]# tar zxvf /root/sarg-2.3.7.tar.gz
+[root@localhost ~]# cd sarg-2.3.7
+[root@localhost ~]# ./configure --prefix=/usr/local/sarg --sysconfdir=/etc/sarg --enable-extraprotection &&make &&make install
+注释：---sysconfigdir=/etc/sarg指定配置文件目录，--enable-extraprotection添加额外的安全保护
+
+2.配置sarg的配置文件；
+[root@localhost ~]# vi /etc/sarg/sarg.conf 
+access_log /usr/local/squid/var/logs/access.log
+##指定squid的访问日志文件
+title "Squid User Access Reports"
+##指定网页标题
+output_dir /var/www/html/sarg
+##sarg的报告生成目录
+user_ip no
+##使用用户名显示
+topuser_sort_field  BYTES reverse
+##指定排序中，访问字节数，按照降序排列
+user_sort_field connect reverse
+##指定用户访问记录，按照降序排列
+exclude_hosts /usr/local/sarg/noreport 
+##指定不计入排序的站点名称文件
+overwrite_report no
+##覆盖已有的日志报告文件
+mail_utility mailx.postfix
+##若发送邮件，指定发送邮件的命令
+charset UTF-8
+##指定字符集
+weekdays 0-6         ##0代表星期日
+##指定日志分析的周期
+hours 0-23    ##注意时间周期的编写，与系统时间对比
+www_document_root /var/www/html
+##客户端访问网页的根目录
+:wq
+
+3.优化sarg服务并启动服务生成记录；
+[root@localhost ~]# touch  /usr/local/sarg/noreport    ##添加不计入排序的站点列表文件
+[root@localhost ~]# ln -s /usr/local/sarg/bin/sarg  /usr/local/bin
+[root@localhost ~]# sarg 				####执行启动一次，记录一次，在网站中可以查询到一次
+SARG: 纪录在文件: 1596, reading: 100.00%
+SARG: 成功的生成报告在 /var/www/html/sarg/2017Aug29-2017Aug29   
+[root@localhost ~]# /etc/init.d/httpd  start
+[root@localhost ~]# chkconfig httpd on
+
+4.计划任务+脚本实现自动生成记录；
+[root@localhost ~]#  vi  /usr/local/sarg/daily.sh
+#!/bin/bash
+TD=$(date +%d/%m/%Y)
+#日_月_年
+YETD=$(date -d "1 day ago" +%d/%m/%Y)
+/usr/local/sarg/bin/sarg -l /usr/local/squid/var/logs/access.log -o /var/www/html/sarg -z -d $YETD-$TD &>/dev/null
+exit 0
+:wq
+[root@localhost ~]#echo “0  0  *  *  *  /usr/local/sarg/daily.sh”  >>/var/spool/cron/root
+
+4.客户端测试；
+客户端使用浏览器进行访问，可以查看到执行成功sarg命令的记录。
+http://192.168.100.150/sarg

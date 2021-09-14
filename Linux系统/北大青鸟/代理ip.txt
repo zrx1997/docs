@@ -1,0 +1,105 @@
+{
+    "configs": [
+        {
+            "server": "au1-sta9.27dzn.site",英国   185.225.12.173
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Australia 1,Rate:1.00"
+        },
+        {
+            "server": "hk3-sta9.27dzn.site",英国  185.227.252.107
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Hong Kong 3,Rate:0.01"
+        },
+        {
+            "server": "hk5-sta9.27dzn.site",  香港特别行政区  103.192.225.108
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Hong Kong 5,Rate:1.00"
+        },
+        {
+            "server": "jp1-sta9.27dzn.site", 英国  185.225.13.42
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Japan 1,Rate:1.50"
+        },
+        {
+            "server": "jp2-sta9.27dzn.site", 欧洲 194.61.238.230
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Japan 2,Rate:1.00"
+        },
+        {
+            "server": "jp3-sta9.27dzn.site",  欧洲 194.61.239.236
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Japan 3,Rate:0.50"
+        },
+        {
+            "server": "nl1-sta9.27dzn.site", 欧洲 194.61.237.248
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Netherlands 1,Rate:0.10"
+        },
+        {
+            "server": "ru1-sta9.27dzn.site",  英国 185.227.254.108
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "Russia 1,Rate:1.20"
+        },
+        {
+            "server": "uk1-sta9.27dzn.site", 欧洲 194.61.236.223
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "United Kingdom 1,Rate:0.10"
+        },
+        {
+            "server": "us1-sta9.27dzn.site", 英国 185.225.15.107
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "United States 1,Rate:0.01"
+        },
+        {
+            "server": "us2-sta9.27dzn.site", 英国 185.225.14.107
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "United States 2,Rate:0.01"
+        },
+        {
+            "server": "us3-sta9.27dzn.site", 捷克 194.50.18.206
+            "server_port": 17052,
+            "local_port": 1080,
+            "password": "f6PDBNEQsezf6jm",
+            "method": "chacha20-ietf-poly1305",
+            "remarks": "United States 3,Rate:0.01"
+        }
+    ],
+    "localPort": 1080,
+    "index": 0,
+    "global": false,
+    "enabled": true,
+    "isDefault": false
+}

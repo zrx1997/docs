@@ -1,0 +1,124 @@
+案例一：
+vi  user.txt
+Zsan
+Lisi
+:wq
+
+vi  useradd_for.sh
+#!/bin/bash
+Un=$(cat /root/user.txt)
+for  i  in  $Un
+do
+useradd $i 
+echo  123123 |passwd  --stdin $i
+done
+:wq
+
+chmod  +x  useradd_for.sh
+./useradd_for.sh
+
+案例二：检查网络中存活主机
+vi  chk_net_alive_host.sh
+#!/bin/bash
+read  -p "please your want chk net:" NET
+for  i  in  $(seq  1  254)
+do
+ping -c 2 $NET.$i &>/dev/null  && echo "$NET.$i is up" || echo "$NET.$i is down"
+done
+
+案例三：检查网络中存活主机
+vi chk_net_alive_host2.sh
+#！/bin/bash
+#by liwenhu 20160924                    ##注释
+ip=192.168.100.                         ##定义变量ip
+for i in {1..254};do                    ##执行for循环语句，取值范围为1-254
+  ping -c 2 -I eth0 $ip$i &>/dev/null     ##编写循环体，使用ping命令测试网络主机连通性
+  if [ $? -eq 0 ];then                    ##使用if判断语句，判断ping命令的结果，若上条命令执行成功
+    B=$(arping -I eth0 -f $ip$i |grep Unicast |awk '{print $5}')    ##若上条ping命令执行成功，证明此主机存在，定义变量B为此主机的MAC地址
+	echo "$ip$i is starting MAC=$B"         ##输入结果和主机的MAC地址变量B到屏幕
+  else                                    ##若ping命令执行不成功，证明主机不存在
+	echo "$ip$i is stoping"
+  fi
+done
+
+案例四：设置开机启动服务
+vi  ck.list
+crond
+iptables
+network
+sshd
+
+vi  chk_ser_onboot_for.sh
+#!/bin/bash
+SL=$(cat /root/ck.list)
+for i in $SL
+do
+        /etc/init.d/$i status |grep pid
+        if [ $? -ne 0 ];then
+                /etc/init.d/$i restart
+        fi
+        chkconfig $i on
+done
+
+案例五：序列列表：
+vi  for_list.sh
+#!/bin/bash
+for  i  in  {vsftpd,dhcpd,named}
+do
+/etc/init.d/$i  restart
+chkconfig $i  on
+done
+for  i  in  {1..254}
+do
+ping -c 2 192.168.100.$i
+done
+
+案例六：数组列表：
+vi for-arry.sh 
+#!/bin/bash
+A=(crond gpm iptables lvm2-monitor network rsyslog sshd udev-post)
+echo ${A[1]}
+echo ${A[5]}
+echo A arry length is ${#A[*]}
+for i in ${A[*]};do
+chkconfig --list $i
+done
+
+案例七：双色球一等奖案例
+vi shuangseqiu.sh
+#!/bin/bash
+>/tmp/num20.txt					##创建并清空文件
+for i in $(seq 1 20)			##执行for循环20次
+do expr $RANDOM % 33 + 1 >>/tmp/num20.txt			##生成33以内的随机数，将随机数+1，模拟真实场景中的双色球数字的生成，通过上述for循环20次，生成20个数输出到文件中
+done
+echo "第$(date +%Y)$(date +%s |tail -c 4)期开奖结果 开奖日期：$(date +%F)"
+echo "==================================================================="
+echo -e "\033[31m 红球：$(cat /tmp/num20.txt |sort -n |uniq |head -6 |xargs echo) \033[0m"
+echo -e "\033[34m 篮球：$(expr $RANDOM % 16 + 1) \033[0m"
+
+案例八：打印*号，每行一个，共四行
+#!/bin/bash
+for (( i=1;i<4;i++ ));do
+  echo "*"
+done
+
+案例九：打印*号，每行5个，共五行
+#!/bin/bash
+for (( i=1;i<=5;i++ ));do
+for (( star=1;star<=5;star++ ));do
+echo -n "*"
+done
+done
+
+案例十:打印*号，承三角形
+#!/bin/bash
+height=$1
+for ((i=1;i<=$height;i++));do
+  for ((star=1;star<=$i;star++))
+    do
+    echo -n "*"
+  done
+  echo ""
+done
+
+案例十一：打印九九乘法表

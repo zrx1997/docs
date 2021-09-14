@@ -1,0 +1,46 @@
+第二章实验（二）：构建透明代理
+环境解释：
+在实验一的基础上修改，将客户端的网关修改为192.168.100.150。
+步骤：
+1.配置透明代理：
+  1)修改配置文件:支持透明代理；
+  2)编写防火墙规则实现端口的重定向：
+2.客户端测试：
+  1）客户端如若是linux主机则取消刚刚设置的linux代理；
+  2）客户端如若是windows主机则取消浏览器设置的代理，并指定网关为代理服务器进行访问http://192.168.3.198进行测试；
+  
+1.配置透明代理：
+1)修改配置文件:支持透明代理
+[root@www ~]# vi /etc/squid.conf
+http_port 192.168.100.150:3128 transparent   ##将http_port 3128修改为支持透明代理
+[root@www ~]# /etc/init.d/squid reload
+[root@www ~]# netstat -utpln |grep squid   ##端口监听已经修改为内网网卡IP
+
+2)编写防火墙规则实现端口的重定向：
+[root@www ~]# iptables -t nat -I PREROUTING -i eth0 -s 192.168.100.0/24 -m multiport -p tcp --dport 80 -j REDIRECT --to 3128     ##端口重定向80-3128，443在透明代理中无法实现重定向
+[root@www ~]# iptables -t nat -A POSTROUTING -o eth1 -s 192.168.100.0/24  -j MASQUERADE		##为了实现客户端访问443号端口的网站，做SNAT
+
+[root@www ~]# iptables -I INPUT -s 192.168.100.0/24 -p tcp --dport 3128 -j ACCEPT
+[root@www ~]# iptables -t nat -L -n   ##查看nat表的防火墙规则
+
+[root@www ~]# iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+  ##允许网关自己所有已经建立的连接
+[root@www ~]# iptables -I INPUT -p tcp --dport 22 -j ACCEPT    ##允许主机ssh远程连接网关主机
+[root@www ~]# iptables -I INPUT -i lo -j ACCEPT  ##允许本地lo网关访问
+[root@www ~]# for i in INPUT FORWARD;do iptables -P $i DROP; done  ##设置默认规则
+[root@www ~]# for i in s d; do iptables -A FORWARD -$i 192.168.100.0/24 -j ACCEPT; done  ##控制能被转发的网段
+
+
+[root@www ~]# sed -i '/forward/s/0/1/g' /etc/sysctl.conf  ##开启路由功能 
+[root@www ~]# sysctl -p
+
+2.客户端测试：
+1）客户端如若是linux主机则取消刚刚设置的linux代理；
+[root@localhost ~]# route del default
+[root@localhost ~]# route add default gw 192.168.100.150  ##设置网关
+[root@localhost ~]# unset HTTP_PROXY  ##取消代理
+[root@localhost ~]# unset HTTPS_PROXY
+[root@localhost ~]# unset FTP_PROXY
+[root@localhost ~]# unset NO_PROXY
+
+2）客户端如若是windows主机则取消浏览器设置的代理，并指定网关为代理服务器进行访问http://192.168.3.198进行测试；

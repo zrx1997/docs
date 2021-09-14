@@ -1,0 +1,283 @@
+shell脚本的测试与判断
+1.测试
+语法：
+[ 操作符  条件 ]  ==  test  操作符  条件
+
+测试的操作符：-f 文件，-d 目录， -e 是否存在，-r 是否可读，-w 是否可写 ， -x 是否可执行
+案例：
+[ -d  /tmp ]
+echo $?
+
+2）整数的比较
+操作符：
+-eq  等于，-ne  不等于， -gt  大于， -lt  小于，ge  大于等于，le 小于等于
+案例：
+[ 10  -gt  11 ]
+echo $?
+
+3）字符串比较
+字符串：指一种数据类型，可以理解位纯文本类型。
+操作符：== 是否相等， !=  不相等  ， -z  是否为空
+案例：
+STR1=hehe
+[ $STR1 == hehe ]
+echo $?
+[  $STR1   !=  linuxfan.cn  ]
+echo $?
+STR2=   ##直		接回车
+echo $?
+[  -z  $STR2  ]  
+echo $?
+
+4）逻辑判断
+逻辑判断即与或非。
+语法：
+[ 表达式1  ]  &&（与）,||(或) ，！（非）  [ 表达式2  ]
+命令1  &&,||,!  命令2
+案例：
+编译安装：
+./configure &&make  &&make 
+[ 1 –ge  2 ]  ||  [ 1 –lt 2  ]  ##测试结果为真
+echo $?
+
+
+案例一：判断lftp是否安装若未安装则安装
+#!/bin/bash
+rpm  -qa  |grep lftp 1>/dev/null
+if  [ $? -ne 0 ];then
+yum  -y  install lftp  &>/dev/null &&echo “lftp  installed.”
+fi
+
+案例二：判断主机CPU占用率
+#!/bin/bash
+CHK_CPU=$(top -b -n 5 | grep Cpu |awk '{print $2}' |awk -F '%' '{print $1}'|tail -1)
+NUM=$(echo "$CHK_CPU*10" |bc |awk -F '.' '{print $1}')
+if [ $NUM -ge 10 ]
+then
+echo "CPU is high"
+fi
+
+案例三：判断lftp是否安装若未安装则安装，安装则卸载；
+#!/bin/bash
+rpm  -qa  |grep lftp 1>/dev/null
+if  [ $? -ne 0 ];then
+yum  -y  install lftp  &>/dev/null &&echo “lftp  installed.”
+else
+rpm -e lftp --nodeps &>/dev/null &&echo "lftp is remove"
+fi
+
+案例四：测评分数脚本
+#!/bin/bash
+while true;do
+read -p "请输入你的分数(退出输入exit):" NUM
+if [[ $NUM == exit ]];then
+			echo "谢谢使用！！！"
+        exit
+else
+        expr $NUM + 1 &>/dev/null
+        if [ $? -ne 0 ];then
+			echo "输入的分数只能为0-100的整数！"
+        elif [ -z $NUM ];then
+			echo "输入的分数不能为空;"
+        elif [ $NUM -eq 0 ];then
+			echo "完美的避过了所有的正确答案！"
+        else
+                if [ $NUM -le 100 ]&&[ $NUM -ge 85 ];then
+					echo "优秀！"
+                elif [ 85 -ge $NUM ]&&[ 60 -le $NUM ];then
+					echo "良好！"
+                else
+					echo "不及格！"
+                fi
+        fi
+fi
+done
+
+案例五：测评分数脚本优化后
+#!/bin/bash
+while true
+do
+read -p "请输入分数（退出输入exit）": COST
+
+if [ "$COST" == "exit" ];then
+  echo -e "\n谢谢使用本次查询，再见！"
+  exit 0
+elif [ "$COST" == "0" ];then
+  echo -e "\n您没有参加测试；"
+else
+  expr $COST + 0 &>/dev/null
+        if [ $? != 0 ];then
+          echo -e "\n（输入的分数应为纯数字形式，请重新输入！）"
+        else
+                if [ 100 -ge $COST ] && [ $COST -ge 85 ];then
+                  echo -e "\n优秀\n"
+                elif [ 84 -ge $COST ] && [ $COST -ge 60 ];then
+                  echo -e "\n良好\n"
+                elif [ 60 -gt $COST ] && [ $COST -ge 0 ];then
+                  echo -e "\n差\n"
+                else
+                  echo -e "\n（输入的分数超出正常范围，请重新输入！）"
+                fi
+
+        fi
+fi
+done
+
+案例六：数值比较脚本
+[root@ns bin]# cat if_then_fi.sh 
+#!/bin/bash
+name=$(basename $0)     ##$0代表脚本本身，basname的作用将脚本文件的完整路径省略掉，直接显示脚本文件的名
+if [ $# -ne 2 -a $# -ne 3 ];then    ##若脚本后边跟的数值不是两个也不是三个的时候
+        echo "Usage:"
+        echo "$name vaule1 value2"
+        echo "$name value1 value2 vaule3"
+        exit 1
+elif [ $# -eq 2 ];then     ##若脚本后边跟的数值是两个的时候，返回两个值得内容，若不是两个，那么就是三个，返回三个值的内容
+        echo "two args:$1,$2"
+  if [ $1 -gt $2 ];then
+     echo "$1 > $2"
+  elif [ $1 -lt $2 ];then
+     echo "$1 < $2"
+  else
+     echo "$1 = $2"
+  fi
+elif [ $# -eq 3 ];then
+        echo "three args:$1,$2,$3"
+  if [ $1 -gt $2 -a $1 -gt $3 ];then
+     echo "$1 >$2,$1 >$3"
+  elif [ $1 -gt $2 -a $1 -lt $3 ];then
+     echo "$1 >$2,$1 < $3"
+  elif [ $1 -gt $2 -a $1 -eq $3 ];then
+     echo "$1 > $2,$1 = $3"
+  elif [ $1 -lt $2 -a $1 -gt $3 ];then
+     echo "$1 < $2,$1 > $3"
+  elif [ $1 -lt $2 -a $1 -lt $3 ];then
+     echo "$1 < $2,$1 < $3"
+  elif [ $1 -lt $2 -a $1 -eq $3 ];then
+     echo "$1 < $2,$1 = $3"
+  fi
+fi
+exit 0    ##退出，返回值为0，正常退出
+[root@ns bin]#./if_then_fi.sh 1 2   ##进行测试，1和2 是测试的值
+
+案例七：数值比较脚本优化后
+[root@ns bin]# cat if_then_fi.sh 
+#!/bin/bash
+name=$(basename $0)     ##$0代表脚本本身，basname的作用将脚本文件的完整路径省略掉，直接显示脚本文件的名
+if [ -z $1 ]||[ -z $2 ];then
+        echo "value1 or value2 not setting Empty"
+        exit 1
+elif [ $# -ne 2 -a $# -ne 3 ];then    ##若脚本后边跟的数值不是两个也不是三个的时候
+        echo "Usage:"
+        echo "$name vaule1 value2"
+        echo "$name value1 value2 vaule3"
+        exit 1
+else
+        expr $1 + 1 &>/dev/null
+        A=$(echo $?)
+        expr $2 + 1 &>/dev/null
+        B=$(echo $?)
+        if [ $A -ne 0 ] || [ $B -ne 0 ];then
+                echo "value1 or value2 need setting integral( 0 - ~ )"
+        elif [ $# -eq 2 ];then     ##若脚本后边跟的数值是两个的时候，返回两个值得内容，若不是两个，那么就是三个，返回三个值的内容
+                echo "two args:$1,$2"
+                if [ $1 -gt $2 ];then
+                        echo "$1 > $2"
+                elif [ $1 -lt $2 ];then
+                        echo "$1 < $2"
+                else
+                        echo "$1 = $2"
+                fi
+        elif [ $# -eq 3 ];then
+                echo "three args:$1,$2,$3"
+                if [ $1 -gt $2 -a $1 -gt $3 ];then
+                        echo "$1 >$2,$1 >$3"
+                elif [ $1 -gt $2 -a $1 -lt $3 ];then
+                        echo "$1 >$2,$1 < $3"
+                elif [ $1 -gt $2 -a $1 -eq $3 ];then
+                        echo "$1 > $2,$1 = $3"
+                elif [ $1 -lt $2 -a $1 -gt $3 ];then
+                        echo "$1 < $2,$1 > $3"
+                elif [ $1 -lt $2 -a $1 -lt $3 ];then
+                        echo "$1 < $2,$1 < $3"
+                elif [ $1 -lt $2 -a $1 -eq $3 ];then
+                        echo "$1 < $2,$1 = $3"
+                fi
+        fi
+fi
+exit 0    ##退出，返回值为0，正常退出
+[root@ns bin]# ./if_then_fi.sh 1 d
+value1 or value2 need setting integral( 0 - ~ )
+[root@ns bin]# ./if_then_fi.sh 1 30
+two args:1,30
+1 < 30
+[root@ns bin]# ./if_then_fi.sh
+value1 or value2 not setting Empty
+
+案例八：编译安装的httpd服务控制脚本
+#!/bin/bash
+if [ $1 == start ];then
+	netstat -utpln |grep 80 &>/dev/null
+	if [ $? -eq 0 ];then
+		echo "httpd is started!"
+		exit 1
+	else
+	/usr/local/httpd/bin/apachectl start &>/dev/null
+	echo "+/usr/local/httpd/bin/apachectl start"
+	echo "+netstat -utpln |grep 80"	
+	netstat -utpln |grep 80
+	PID=$(netstat -utpln |grep 80 |awk '{print $7}'|awk -F'/' '{print $1}')
+	echo -e "httpd is running ! PID is $PID"
+	fi
+elif [ $1 == stop ];then
+	netstat -utpln |grep 80 &>/dev/null
+	if [ $? -ne 0 ];then
+		echo "httpd is stoped!"
+		exit 1
+	else
+	/usr/local/httpd/bin/apachectl stop &>/dev/null
+	echo "+/usr/local/httpd/bin/apachectl stop"
+	sleep 2
+	echo "+netstat -utpln |grep 80"
+	netstat -utpln |grep 80
+		if [ $? -ne 0 ];then
+			echo "httpd is stopping!"
+		fi
+	fi
+elif [ $1 == restart ];then
+	netstat -utpln |grep 80 &>/dev/null
+	if [ $? -ne 0 ];then
+		echo "httpd not is started!"
+		/usr/local/httpd/bin/apachectl start &>/dev/null
+        	echo "+/usr/local/httpd/bin/apachectl start"
+        	sleep 2
+        	echo "+netstat -utpln |grep 80"
+        	netstat -utpln |grep 80
+        	if [ $? -eq 0 ];then
+                	echo "httpd is started!"
+        	fi
+	else
+	/usr/local/httpd/bin/apachectl stop &>/dev/null
+        echo "+/usr/local/httpd/bin/apachectl stop"
+	sleep 2
+	/usr/local/httpd/bin/apachectl start &>/dev/null
+        echo "+/usr/local/httpd/bin/apachectl start"
+	sleep 2
+        echo "+netstat -utpln |grep 80"
+        netstat -utpln |grep 80
+        	if [ $? -eq 0 ];then
+                	echo "httpd is started!"
+        	fi
+	fi
+elif [ $1 == status ];then
+	netstat -utpln |grep 80 &>/dev/null
+	if [ $? -eq 0 ];then
+		echo "httpd is running!"
+		PID=$(netstat -utpln |grep 80 |awk '{print $7}'|awk -F'/' '{print $1}')
+        	echo -e "httpd is running ! PID is $PID"
+	else
+		echo "httpd is not running!"
+	fi
+else
+	echo "Usage: /etc/init.d/httpd start|stop|restart|status "
+fi

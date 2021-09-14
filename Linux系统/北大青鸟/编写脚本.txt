@@ -1,0 +1,60 @@
+[root@www ~]# mkdir -p /root/bin
+[root@www ~]# cd /root/bin
+[root@www bin]# vi sysinfo.sh 
+#!/bin/bash    ##从/etc/shells中选择一个shell解析下面的内容
+#by linuxfan
+#20160614
+#system info.
+#我的第一个脚本，这是一个注释
+#查看网络相关信息
+ip a
+hostname
+cat /etc/hosts
+cat /etc/resolv.conf
+ip r
+#查看设备包括内存、cpu、磁盘等使用情况
+cat /proc/cpuinfo
+lscpu
+cat /proc/meminfo |grep -i total
+free 
+cat /proc/partitions
+df -hT
+##查看进程和服务情况
+ps aux |wc -l
+service --status-all
+chkconfig --list |grep 3:on
+:wq
+[root@www bin]# chmod +x sysinfo.sh   ##授权
+[root@www bin]# /root/bin/sysinfo.sh   ##路径执行
+[root@www bin]# sh -x sysinfo.sh  ##测试时常用不需要执行权限
+[root@www tmp]# source sysinfo.sh  ##一般用于让配置文件生效等，不需要执行权限
+
+变量及管道的使用：
+1.使用变量，编写安装apache的脚本：
+[root@www bin]# vim install_httpd.sh 
+#!/bin/bash
+#install apache httpd!
+#############download httpd#####
+HV=httpd-2.2.17
+wget ftp://ftp.linuxfan.cn/tools/$HV.tar.gz -P /root
+##########解压缩，并安装#############
+tar zxvf /root/$HV.tar.gz -C /usr/src/ >/dev/null
+cd /usr/src/$HV/
+./configure --prefix=/usr/local/httpd --enable-so --enable-cgi --enable-rewrite --enable-ssl&&make &&make install &>/dev/null
+:wq
+以此类推，编写安装mysql及php的脚本
+chmod +x install_httpd.sh
+/root/bin/install_httpd.sh   ##执行脚本并安装
+ls /usr/local/httpd
+2.练习重定向和管道：
+[root@www bin]#ip a |grep eth0 |grep inet |awk {'print $2'} |awk -F '/' {'print $1'}
+[root@www bin]# vim  hosts.sh 
+#!/bin/bash
+#2016-01-14 by linuxfan
+##设置hosts解析，为www.linuxfan.cn
+IP=$(ip a |grep eth0 |grep inet |awk {'print $2'} |awk -F '/' {'print $1'})
+read -p "请输入你的主机名:" NANE
+echo "$IP	 $NANE"  >>/etc/hosts
+:wq
+[root@www bin]#sh -x hosts.sh
+[root@www bin]#cat /etc/hosts

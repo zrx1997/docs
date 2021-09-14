@@ -1,0 +1,81 @@
+案例一：判断lftp是否安装若未安装则安装
+#!/bin/bash
+rpm  -qa  |grep lftp 1>/dev/null
+if  [ $? -ne 0 ];then
+yum  -y  install lftp  &>/dev/null &&echo “lftp  installed.”
+fi
+
+案例二：判断主机CPU占用率
+#!/bin/bash
+CHK_CPU=$(top -b -n 5 | grep Cpu |awk '{print $2}' |awk -F '%' '{print $1}'|tail -1)
+NUM=$(echo "$CHK_CPU*10" |bc |awk -F '.' '{print $1}')
+if [ $NUM -ge 10 ]
+then
+echo "CPU is high"
+fi
+
+案例三：判断lftp是否安装若未安装则安装，安装则卸载；
+#!/bin/bash
+rpm  -qa  |grep lftp 1>/dev/null
+if  [ $? -ne 0 ];then
+yum  -y  install lftp  &>/dev/null &&echo “lftp  installed.”
+else
+rpm -e lftp --nodeps &>/dev/null &&echo "lftp is remove"
+fi
+
+案例四：测评分数脚本
+#!/bin/bash
+while true;do
+read -p "请输入你的分数(退出输入exit):" NUM
+if [[ $NUM == exit ]];then
+			echo "谢谢使用！！！"
+        exit
+else
+        expr $NUM + 1 &>/dev/null
+        if [ $? -ne 0 ];then
+			echo "输入的分数只能为0-100的整数！"
+        elif [ -z $NUM ];then
+			echo "输入的分数不能为空;"
+        elif [ $NUM -eq 0 ];then
+			echo "完美的避过了所有的正确答案！"
+        else
+                if [ $NUM -le 100 ]&&[ $NUM -ge 85 ];then
+					echo "优秀！"
+                elif [ 85 -ge $NUM ]&&[ 60 -le $NUM ];then
+					echo "良好！"
+                else
+					echo "不及格！"
+                fi
+        fi
+fi
+done
+
+案例五：测评分数脚本优化后
+#!/bin/bash
+while true
+do
+read -p "请输入分数（退出输入exit）": COST
+
+if [ "$COST" == "exit" ];then
+  echo -e "\n谢谢使用本次查询，再见！"
+  exit 0
+elif [ "$COST" == "0" ];then
+  echo -e "\n您没有参加测试；"
+else
+  expr $COST + 0 &>/dev/null
+        if [ $? != 0 ];then
+          echo -e "\n（输入的分数应为纯数字形式，请重新输入！）"
+        else
+                if [ 100 -ge $COST ] && [ $COST -ge 85 ];then
+                  echo -e "\n优秀\n"
+                elif [ 84 -ge $COST ] && [ $COST -ge 60 ];then
+                  echo -e "\n良好\n"
+                elif [ 60 -gt $COST ] && [ $COST -ge 0 ];then
+                  echo -e "\n差\n"
+                else
+                  echo -e "\n（输入的分数超出正常范围，请重新输入！）"
+                fi
+
+        fi
+fi
+done

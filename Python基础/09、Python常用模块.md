@@ -298,3 +298,21 @@ logging.error(u"桃谷绘里香")
 logging.critical(u"泷泽萝拉")
 ```
 
+
+
+### filecmp
+
+```
+文件及目录比较模块
+	https://docs.python.org/zh-cn/3.6/library/filecmp.html
+
+文件差异比较
+	https://docs.python.org/zh-cn/3/library/difflib.html
+```
+
+### psutil
+
+```
+系统进程相关
+```
+

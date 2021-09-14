@@ -1,0 +1,47 @@
+案例一：创建用户
+[root@ns bin]# cat useradd_while.sh
+#!/bin/bash
+PRE=stu
+i=0
+while [ $i -le 10 ];do
+useradd $PRE$i
+echo 123123 |passwd --stdin $PRE$i
+#i=$(expr $i + 1)
+let i++
+done
+
+案例二：猜价钱
+[root@ns bin]# cat price_guess.sh 
+#!/bin/bash
+PRICE=$(expr $RANDOM % 1000)
+TMS=0
+echo "please insert a number like this(1-999)"
+while true;do
+read -p "please give number:" INT
+let TMS++
+if [ $INT -eq $PRICE ];then
+	echo "your luckly. right! "
+	echo "Your guess $TMS"
+	exit 0
+elif [ $INT -gt $PRICE ];then
+	echo "Too High,try a again. "
+else
+	echo "Too low,try a again."
+fi
+done
+
+案例三：测试退出命令
+[root@ns bin]# cat die_while.sh 
+#!/bin/bash
+i=0
+j=$(expr $RANDOM % 10)
+while true;do
+echo $i
+let i++
+sleep 1   ##休眠1秒避免死循环产生
+if [ $i -eq $j ];then
+echo "ok,$j random"
+break      ##将break替换为exit执行后查看效果
+fi
+done
+df -hT

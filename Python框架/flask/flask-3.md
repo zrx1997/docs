@@ -382,6 +382,23 @@ db.session.commit()
 # 方法3【批量操作, 实现类似django里面F函数的效果】
 ret = Student.query.filter(Student.age == 22).update({Student.money: Student.money+'200'})
 db.session.commit()
+
+
+# 批量更新，一次操作，更新全部
+db.session.bulk_update_mappings
+class User(BaseModel):
+	__tablename__ = "User"
+    id = db.Column(db.String(50), comment="id")
+    name = db.Column(db.String(50), comment="name")
+    
+
+db.session.bulk_update_mappings(
+        User, # 当前映射类
+        [*max_obj] # 列表里套的是字典打散
+    )
+
+db.session.commit()
+
 ```
 
 
@@ -554,6 +571,9 @@ ret = Student.query.order_by(Student.age.desc()).all()
 
 # 查询所有学生，并按年龄进行倒序排列，年龄相同，则按id进行降序排序.
 ret = Student.query.order_by(Student.age.desc(),Student.id.desc()).all()
+
+# 查询某个范围内的最大值
+data = Hosts.query.filter(Hosts.id.in_([1])).order_by(Hosts.score.desc()).first()
 ```
 
 
