@@ -30,7 +30,7 @@ https://github.com/upx/upx
 
 
 
-#### Windows 
+#### Windows设置
 
 ```bash
 # 设置为Mac平台
@@ -62,19 +62,30 @@ SET GOARCH=amd64
 
 
 
-#### Linux
+#### Linux设置
 
 ```bash
-# 设置为Mac平台
+# 编译为Mac平台
 CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build main.go
 
-# 设置为windows系统
+# 编译为windows系统
 CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go
+
+#编译为Mips系统
+GOOS=linux
+GOARCH=mipsle
+GOMIPS=softfloat
+CGO_ENABLED=0
+
+go build -trimpath -ldflags="-s -w"  main.go
+
+
+
 ```
 
 
 
-#### Mac
+#### Mac设置
 
 ```bash
 # 设置为Linux平台

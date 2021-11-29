@@ -67,6 +67,7 @@ systemctl disable frps
 ### 配置
 
 ```bash
+# 服务端配置
 [root@MyCloudServer frp]# cat frps.ini 
 [common]
 server_addr = 0.0.0.0
@@ -79,6 +80,7 @@ detailed_errors_to_client = true[common]
 bind_port = 7000
 
 
+# 客户端配置
 [root@MyCloudServer frp]# cat frpc.ini 
 [common]
 server_addr = 127.0.0.1

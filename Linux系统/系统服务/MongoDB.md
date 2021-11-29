@@ -73,6 +73,70 @@ firewall-cmd --reload
 
 
 
+### MongoDB单节点备份
+
+工具下载： https://www.mongodb.com/try/download/database-tools
+
+![image-20211109163643311](https://raw.githubusercontent.com/adcwb/storages/master/image-20211109163643311.png)
+
+
+
+备份数据库
+
+```bash
+[root@MyCloudServer ~]# mongodump --gzip --out /backup/mongodb/
+2021-11-09T16:23:42.509+0800    writing test.runoob to /backup/mongodb/test/runoob.bson
+2021-11-09T16:23:42.513+0800    done dumping test.runoob (1 document)
+
+--db： 指定备份的数据集，若不指定则默认备份所有
+--host="mongodb0.example.com:27017" 指定主机地址和端口
+
+--host="mongodb0.example.com"  分开指定
+--port=27017
+
+--uri="mongodb://mongodb0.example.com:27017
+--gzip 压缩输出
+
+mongodump --gzip --out /backup/mongodb/			# 备份所有数据库
+mongodump --db mydb --out /backup/mongodb/ 		# 备份单个数据库
+mongodump -d mydb  --collection users -o /backup/mongodb/ # 备份单个集合
+
+```
+
+
+
+还原数据库
+
+```bash
+[root@MyCloudServer ~]# mongorestore --db test /backup/mongodb/test/runoob.bson 
+2021-11-09T16:32:36.125+0800    checking for collection data in /backup/mongodb/test/runoob.bson
+2021-11-09T16:32:36.126+0800    reading metadata for test.runoob from /backup/mongodb/test/runoob.metadata.json
+2021-11-09T16:32:36.159+0800    restoring test.runoob from /backup/mongodb/test/runoob.bson
+2021-11-09T16:32:36.209+0800    finished restoring test.runoob (1 document, 0 failures)
+2021-11-09T16:32:36.209+0800    no indexes to restore for collection test.runoob
+2021-11-09T16:32:36.209+0800    1 document(s) restored successfully. 0 document(s) failed to restore.
+
+--quiet 	# 静默输出
+--version	# 版本号
+--host=<hostname><:port>, -h=<hostname><:port>
+--username=<username>, -u=<username>
+--password=<password>, -p=<password>
+--db=<database>, -d=<database>
+--collection=<collection>, -c=<collection>
+--drop		# 还原前先删除
+--gzip		# 从压缩包中还原
+--dir=string	# 指定转储目录
+
+mongorestore --gzip /backup/mongodb/			# 恢复所有数据库
+mongorestore --db mydb /var/backups/mongo/mydb		# 恢复单个数据库
+mongorestore -d mydb -c users mydb/users.bson		# 恢复单个集合
+mongoimport --db mydb --collection users --file users.json --jsonArray # 恢复单个集合 json格式 
+```
+
+
+
+
+
 ### MongoDB复制集
 
 ![image-20210903092250414](https://raw.githubusercontent.com/adcwb/storages/master/image-20210903092250414.png)
